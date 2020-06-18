@@ -4,6 +4,8 @@ var reverse_state = 0;
 
 var start_new_game, start_option;
 
+var countdown;
+
 function setup() {
 
   textFont(game_Font);
@@ -13,6 +15,7 @@ function setup() {
   start_new_game = false;
   start_option = false;
   begin_a_game = false;
+  countdown = 200;
   
   for(i=0;i<4;i++)
     player_score.push(0);
@@ -43,28 +46,34 @@ function draw(){
     textSize(16);
     text(player_score[i], 20+i*20, 20);
   }
-  for(let power of power_ups){
-    power.update();
-    power.display(t);
+  if(countdown>0)
+    countdown--;
+  if(countdown%60>=50&&countdown>0){
+    push();
+    fill(255);
+    text(int(countdown/60)+1, windowWidth/2, windowHeight/2);
+    pop();
   }
-  for(let bullet of flying_bullets){
-    bullet.update();
-    bullet.display();
-  }
-  for(let mine of mines){
-    mine.update();
-    mine.display();
-  }
-  for(let player of players){
-    if(player.state<=2){
-      player.update();
-      player.display_ship();
-      player.display_ammo();
+  if(countdown==0){
+    for(let power of power_ups){
+      power.update();
+      power.display();
     }
-  }
-  for(let bullet of flying_bullets){
-    bullet.update();
-    bullet.display();
+    for(let bullet of flying_bullets){
+      bullet.update();
+      bullet.display();
+    }
+    for(let mine of mines){
+      mine.update();
+      mine.display();
+    }
+    for(let player of players){
+      if(player.state<=2){
+        player.update();
+        player.display_ship();
+        player.display_ammo();
+      }
+    }
   }
 }
 

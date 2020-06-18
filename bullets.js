@@ -79,12 +79,13 @@ function mine_bullets(x, y, number){
       for(let player of players){
         if(player.state<=2 && len(player.posX, player.posY, this.posX, this.posY)<=100){
           player.state = 3;
-          if(player.state==3){
+          if(this.player_shot!=player.order)
             player_score[this.player_shot]++;
-            if(player.type_special_ammo!="normal"){
-              dropout_power(player.posX, player.posY, player.type_special_ammo);
-              player.type_special_ammo = "normal";
-            }
+          else
+            player_score[this.player_shot]--;
+          if(player.type_special_ammo!="normal"){
+            dropout_power(player.posX, player.posY, player.type_special_ammo);
+            player.type_special_ammo = "normal";
           }
         }
       }
@@ -208,12 +209,10 @@ function laser_bullets(x, y, rotation, number){
       && Math.abs(player.posX-this.posX)>=Math.abs(player.posX-this.posX-this.persec[0])
       && Math.abs(player.posY-this.posY)>=Math.abs(player.posY-this.posY-this.persec[1])){
         player.state = 3;
-        if(player.state==3){
-          player_score[this.player_shot]++;
-          if(player.type_special_ammo!="normal"){
-            dropout_power(player.posX, player.posY, player.type_special_ammo);
-            player.type_special_ammo = "normal";
-          }
+        player_score[this.player_shot]++;
+        if(player.type_special_ammo!="normal"){
+          dropout_power(player.posX, player.posY, player.type_special_ammo);
+          player.type_special_ammo = "normal";
         }
       }
     }
