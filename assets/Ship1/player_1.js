@@ -11,9 +11,9 @@ function player1(){ // Tàu 1
   this.time_out_of_ship = 0;                // Thời điểm phá nát rời khỏi tàu
 
   this.normal_ammo = 3;                     // Đạn bình thường ban đầu
-  this.special_ammo = 3;                    // Đạn đặc biệt ban đầu
+  this.special_ammo = 0;                    // Đạn đặc biệt ban đầu
   this.reload = 0;                          // Đếm thời gian để nạp 1 viên đạn bình thường
-  this.type_special_ammo = "laser"               // Loại đạn ban đầu
+  this.type_special_ammo = "normal"         // Loại đạn ban đầu
 
   this.order = 0;                           // Vị trí trong mảng
 
@@ -68,6 +68,8 @@ function player1(){ // Tàu 1
     }
 
     this.ammo_rotation++;
+    if(this.ammo_rotation==360)
+      this.ammo_rotation = 0;
   }
 
   this.display_ship = function(){ // Vẽ tàu
@@ -79,12 +81,14 @@ function player1(){ // Tàu 1
     pop()
   }
 
-  this.display_ammo = function(time_passed){  // Vẽ đạn bay quanh tàu
+  this.display_ammo = function(){  // Vẽ đạn bay quanh tàu
     if(this.state<=1){
       push()
       fill(255);
       translate(this.posX, this.posY);
+      angleMode(DEGREES);
       rotate(this.ammo_rotation);
+      angleMode(RADIANS);
       for(let i=0;i<=this.normal_ammo-1;i++){
         rotate(TWO_PI/3.0);
         square(25, -2.5, 5);

@@ -43,7 +43,6 @@ function draw(){
     textSize(16);
     text(player_score[i], 20+i*20, 20);
   }
-  let t = frameCount / 60.0;
   for(let power of power_ups){
     power.update();
     power.display(t);
@@ -60,7 +59,7 @@ function draw(){
     if(player.state<=2){
       player.update();
       player.display_ship();
-      player.display_ammo(t);
+      player.display_ammo();
     }
   }
   for(let bullet of flying_bullets){

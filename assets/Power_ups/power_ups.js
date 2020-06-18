@@ -3,6 +3,8 @@ function reverse_power(x, y){
   this.posX = x;
   this.posY = y;
 
+  this.rotation = 0;
+
   this.update = function(){
     for(let player of players){
       if(player.state<=1 && len(player.posX, player.posY, this.posX, this.posY)<=18){
@@ -11,12 +13,18 @@ function reverse_power(x, y){
         power_ups.splice(index, 1);
       }
     }
+
+    this.rotation++;
+    if(this.rotation==360)
+      this.rotation = 0;
   }
 
-  this.display = function(time_passed){
+  this.display = function(){
     push()
     translate(this.posX, this.posY);
-    rotate(time_passed);
+    angleMode(DEGREES);
+    rotate(this.rotation);
+    angleMode(RADIANS);
     imageMode(CENTER);
     image(reverse_png, 0, 0);
     pop()
@@ -28,6 +36,8 @@ function mine_power(x, y){
   this.posX = x;
   this.posY = y;
 
+  this.rotation = 0;
+
   this.update = function(){
     for(let player of players){
       if(player.state<=1 && len(player.posX, player.posY, this.posX, this.posY)<=18){
@@ -37,12 +47,18 @@ function mine_power(x, y){
         power_ups.splice(index, 1);
       }
     }
+
+    this.rotation++;
+    if(this.rotation==360)
+      this.rotation = 0;
   }
 
-  this.display = function(time_passed){
+  this.display = function(){
     push()
     translate(this.posX, this.posY);
-    rotate(time_passed);
+    angleMode(DEGREES);
+    rotate(this.rotation);
+    angleMode(RADIANS);
     imageMode(CENTER);
     image(mine_png, 0, 0);
     pop()
@@ -54,6 +70,8 @@ function scatter_power(x, y){
   this.posX = x;
   this.posY = y;
 
+  this.rotation = 0;
+
   this.update = function(){
     for(let player of players){
       if(player.state<=1 && len(player.posX, player.posY, this.posX, this.posY)<=18){
@@ -63,12 +81,18 @@ function scatter_power(x, y){
         power_ups.splice(index, 1);
       }
     }
+
+    this.rotation++;
+    if(this.rotation==360)
+      this.rotation = 0;
   }
 
-  this.display = function(time_passed){
+  this.display = function(){
     push()
     translate(this.posX, this.posY);
-    rotate(time_passed);
+    angleMode(DEGREES);
+    rotate(this.rotation);
+    angleMode(RADIANS);
     imageMode(CENTER);
     image(scatter_png, 0, 0);
     pop()
@@ -80,6 +104,8 @@ function laser_power(x, y){
   this.posX = x;
   this.posY = y;
 
+  this.rotation = 0;
+
   this.update = function(){
     for(let player of players){
       if(player.state<=1 && len(player.posX, player.posY, this.posX, this.posY)<=18){
@@ -89,12 +115,18 @@ function laser_power(x, y){
         power_ups.splice(index, 1);
       }
     }
+
+    this.rotation++;
+    if(this.rotation==360)
+      this.rotation = 0;
   }
 
   this.display = function(time_passed){
     push()
     translate(this.posX, this.posY);
-    rotate(time_passed);
+    angleMode(DEGREES);
+    rotate(this.rotation);
+    angleMode(RADIANS);
     imageMode(CENTER);
     image(laser_png, 0, 0);
     pop()

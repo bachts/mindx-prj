@@ -19,6 +19,8 @@ function player2(){
 
   this.knockback = 0;
 
+  this.ammo_rotation = 0;
+
   this.update = function(){
 
     if(keyIsPressed){
@@ -64,6 +66,10 @@ function player2(){
         this.time_out_of_ship = 0;
       }
     }
+
+    this.ammo_rotation++;
+    if(this.ammo_rotation==360)
+      this.ammo_rotation = 0;
   }
 
   this.display_ship = function(){
@@ -75,12 +81,14 @@ function player2(){
     pop()
   }
 
-  this.display_ammo = function(time_passed){
+  this.display_ammo = function(){
     if(this.state<=1){
       push()
       fill(255);
       translate(this.posX, this.posY);
-      rotate(time_passed);
+      angleMode(DEGREES);
+      rotate(this.ammo_rotation);
+      angleMode(RADIANS);
       for(let i=0;i<=this.normal_ammo-1;i++){
         rotate(TWO_PI/3.0);
         square(25, -2.5, 5);
