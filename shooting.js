@@ -1,79 +1,74 @@
-let x = 10, y = 10, flag = true;
-let canvasWidth = 400;
-let canvasHeight = 400;
+var players = [], flying_bullets = [], player_score = [], power_ups = [], mines = [];
 
-let arr = [], ammo = 30;
+var reverse_state = 0;
+
+var start_new_game, start_option;
 
 function setup() {
-  createCanvas(canvasWidth, canvasHeight);
+
+  textFont(game_Font);
+  createCanvas(windowWidth, windowHeight);
   frameRate(60);
-  noStroke();
+
+  start_new_game = false;
+  start_option = false;
+  begin_a_game = false;
+  
+  for(i=0;i<4;i++)
+    player_score.push(0);
+  players.push(new player1());
+  players.push(new player2());
+  players.push(new player3());
+  players.push(new player4());
+  new_random_power_spawn(windowWidth/2, windowHeight/2);
 }
 
-function draw() {
-  background(220);
-  let t = frameCount / 60.0;
-  keyPressed()
+function draw(){
+  image(space_background, 0, 0, windowWidth, windowHeight);
+  // if(!start_new_game&&!start_option){
+  //   starting_menu();
+  //   noLoop();
+  // }
+  // else if(start_option){
+  //   options_display();
+  //   noLoop();
+  // }
   push()
-  fill(0, 206, 209);
-  translate(x, y);
-  circle(0, 0, 20);
+  strokeWeight(10);
+  noFill();
+  stroke("blue");
+  rect(20, 20, windowWidth-40, windowHeight-40, 5);
   pop()
-  if(!flag){
-    push()
-    fill(0, 206, 209);
-    text("reloading", x-23, y-20);
-    ammo++;
-    if (ammo===30){
-      flag = true;
-      ammo = 30
-    }
-    pop()
+  for(i=0;i<4;i++){
+    textSize(16);
+    text(player_score[i], 20+i*20, 20);
   }
-  if (mouseIsPressed){
-    if (mouseButton==LEFT&&ammo>0&&flag){
-      arr.push(new bullets(t));
-      ammo--;
-      if (ammo===0)
-        flag = false;
-    }
+  let t = frameCount / 60.0;
+  for(let power of power_ups){
+    power.update();
+    power.display(t);
   }
-  for(let bullet of arr){
-    bullet.update(t);
+  for(let bullet of flying_bullets){
+    bullet.update();
     bullet.display();
   }
-  text("Bullets: " + ((flag==true) ? ammo : 0) + "/30", 10, 20)
-}
-function keyPressed(){
-  if (keyIsPressed){
-    if(keyIsDown(65))
-      x-=1.5;
-    if(keyIsDown(83))
-      y+=1.5;
-    if(keyIsDown(87))
-      y-=1.5;
-    if(keyIsDown(68))
-      x+=1.5;
+  for(let mine of mines){
+    mine.update();
+    mine.display();
+  }
+  for(let player of players){
+    if(player.state<=2){
+      player.update();
+      player.display_ship();
+      player.display_ammo(t);
+    }
+  }
+  for(let bullet of flying_bullets){
+    bullet.update();
+    bullet.display();
   }
 }
-function bullets(t){
-  this.posX = x;
-  this.posY = y;
-  let length = Math.sqrt(Math.pow(mouseX-x, 2) + Math.pow(mouseY-y, 2));
-  this.persec = [(mouseX-x)*8/length + random(-1, 0, 1), (mouseY-y)*8/length + random(-1, 0, 1)];
-  this.timestart = t;
-  this.update = function(t) {
-    this.posX += this.persec[0];
-    this.posY += this.persec[1];
-    if (this.posY>canvasWidth||this.posY<0||this.posX>canvasHeight||this.posX<0||t-this.timestart>0.3){
-      let index = arr.indexOf(this);
-      arr.splice(index, 1);
-    }
-  };
-  this.display = function() {
-    push()
-    fill(0);
-    ellipse(this.posX, this.posY, 3);
-    pop()
-  };
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
