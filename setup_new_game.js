@@ -18,6 +18,15 @@ function options_display(){
   button_back.size(80, 25);
   button_back.position(30, windowHeight-60);
   button_back.mouseClicked(function(){start_option=false; loop(); button_back.remove();});
+
+  button_music = createButton("MUSIC");
+  button_music.size(100, 25);
+  button_music.position(windowWidth/2-120, windowHeight/2);
+
+  button_sound = createButton("SOUND");
+  button_sound.size(100, 25);
+  button_sound.position(windowWidth/2+120, windowHeight/2);
+
   pop()
 }
 
