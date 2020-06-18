@@ -19,6 +19,8 @@ function player1(){ // Tàu 1
 
   this.knockback = 0;                       // Bị lùi lại do đạn laze
 
+  this.ammo_rotation = 0;
+
   this.update = function(){ // Cập nhật trạng thái tàu
 
     if(keyIsPressed){
@@ -64,6 +66,8 @@ function player1(){ // Tàu 1
         this.time_out_of_ship = 0;
       }
     }
+
+    this.ammo_rotation++;
   }
 
   this.display_ship = function(){ // Vẽ tàu
@@ -80,7 +84,7 @@ function player1(){ // Tàu 1
       push()
       fill(255);
       translate(this.posX, this.posY);
-      rotate(time_passed);
+      rotate(this.ammo_rotation);
       for(let i=0;i<=this.normal_ammo-1;i++){
         rotate(TWO_PI/3.0);
         square(25, -2.5, 5);

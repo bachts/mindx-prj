@@ -25,48 +25,48 @@ function setup() {
 
 function draw(){
   image(space_background, 0, 0, windowWidth, windowHeight);
-  if(!start_new_game&&!start_option){
-    noLoop();
-    starting_menu();
+  // if(!start_new_game&&!start_option){
+  //   noLoop();
+  //   starting_menu();
+  // }
+  // else if(start_option){
+  //   options_display();
+  //   noLoop();
+  // }
+  push()
+  strokeWeight(10);
+  noFill();
+  stroke("blue");
+  rect(20, 20, windowWidth-40, windowHeight-40, 5);
+  pop()
+  for(i=0;i<4;i++){
+    textSize(16);
+    text(player_score[i], 20+i*20, 20);
   }
-  else if(start_option){
-    options_display();
-    noLoop();
+  let t = frameCount / 60.0;
+  for(let power of power_ups){
+    power.update();
+    power.display(t);
   }
-  // push()
-  // strokeWeight(10);
-  // noFill();
-  // stroke("blue");
-  // rect(20, 20, windowWidth-40, windowHeight-40, 5);
-  // pop()
-  // for(i=0;i<4;i++){
-  //   textSize(16);
-  //   text(player_score[i], 20+i*20, 20);
-  // }
-  // let t = frameCount / 60.0;
-  // for(let power of power_ups){
-  //   power.update();
-  //   power.display(t);
-  // }
-  // for(let bullet of flying_bullets){
-  //   bullet.update();
-  //   bullet.display();
-  // }
-  // for(let mine of mines){
-  //   mine.update();
-  //   mine.display();
-  // }
-  // for(let player of players){
-  //   if(player.state<=2){
-  //     player.update();
-  //     player.display_ship();
-  //     player.display_ammo(t);
-  //   }
-  // }
-  // for(let bullet of flying_bullets){
-  //   bullet.update();
-  //   bullet.display();
-  // }
+  for(let bullet of flying_bullets){
+    bullet.update();
+    bullet.display();
+  }
+  for(let mine of mines){
+    mine.update();
+    mine.display();
+  }
+  for(let player of players){
+    if(player.state<=2){
+      player.update();
+      player.display_ship();
+      player.display_ammo(t);
+    }
+  }
+  for(let bullet of flying_bullets){
+    bullet.update();
+    bullet.display();
+  }
 }
 
 function windowResized() {
