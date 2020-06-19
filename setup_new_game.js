@@ -50,6 +50,14 @@ function options_display(){
 }
 
 function setup_new_game(){
+  while(mines.length>0)
+    mines.pop();
+  while(flying_bullets.length>0)
+    flying_bullets.pop();
+  while(power_ups.length>0)
+    power_ups.pop();
+  while(aftermath_actions.length>0)
+    aftermath_actions.pop();
   while(players.length>0){
     players.pop();
     player_score.pop();
@@ -68,4 +76,27 @@ function setup_new_game(){
     players.push(new player4());
     player_score.push(0);
   }
+  new_random_power_spawn(windowWidth/2, windowHeight/2);
+}
+
+function setup_new_round(){
+  while(players.length>0)
+    players.pop();
+  while(mines.length>0)
+    mines.pop();
+  while(flying_bullets.length>0)
+    flying_bullets.pop();
+  while(power_ups.length>0)
+    power_ups.pop();
+  while(aftermath_actions.length>0)
+    aftermath_actions.pop();
+  players.push(new player1());
+  players.push(new player2());
+  if(number_of_players==3)
+    players.push(new player3());
+  else if(number_of_players==4){
+    players.push(new player3());
+    players.push(new player4());
+  }
+  new_random_power_spawn(windowWidth/2, windowHeight/2);
 }

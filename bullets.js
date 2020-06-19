@@ -21,7 +21,7 @@ function normal_bullets(x, y, rotation, number){
       if(player.state<=2 && len(player.posX, player.posY, this.posX, this.posY)<=17 && player.order!=this.player_shot){
         player.state++;
         if(player.state==3){
-          player_score[this.player_shot]++;
+          aftermath_actions.push([this.player_shot, 1]);
           if(player.type_special_ammo!="normal"){
             dropout_power(player.posX, player.posY, player.type_special_ammo);
             player.type_special_ammo = "normal";
@@ -80,9 +80,9 @@ function mine_bullets(x, y, number){
         if(player.state<=2 && len(player.posX, player.posY, this.posX, this.posY)<=100){
           player.state = 3;
           if(this.player_shot!=player.order)
-            player_score[this.player_shot]++;
+            aftermath_actions.push([this.player_shot, 1]);
           else
-            player_score[this.player_shot]--;
+            aftermath_actions.push([this.player_shot, -1]);
           if(player.type_special_ammo!="normal"){
             dropout_power(player.posX, player.posY, player.type_special_ammo);
             player.type_special_ammo = "normal";
@@ -144,7 +144,7 @@ function scatter_bullets(x, y, rotation, number){
       if(player.state<=2 && len(player.posX, player.posY, this.posX, this.posY)<=17 && player.order!=this.player_shot){
         player.state++;
         if(player.state==3){
-          player_score[this.player_shot]++;
+          aftermath_actions.push([this.player_shot, 1]);
           if(player.type_special_ammo!="normal"){
             dropout_power(player.posX, player.posY, player.type_special_ammo);
             player.type_special_ammo = "normal";
@@ -200,16 +200,16 @@ function laser_bullets(x, y, rotation, number){
   this.update = function() {
     for(let mine of mines){
       if(Math.abs(this.line_function[0]*mine.posX+this.line_function[1]*mine.posY+this.line_function[2])<=27
-        && Math.abs(mine.posX-this.posX)>=Math.abs(mine.posX-this.posX-this.persec[0])
-        && Math.abs(mine.posY-this.posY)>=Math.abs(mine.posY-this.posY-this.persec[1]))
+        && mine.posX>=Math.min(this.posX, this.lastX)-27 && mine.posX<=Math.max(this.posX, this.lastX)+27
+        && mine.posY>=Math.min(this.posY, this.lastY)-27 && mine.posY<=Math.max(this.posY, this.lastY)+27)
         mine.triggered = true;
     }
     for(let player of players){
       if(player.state<=2 && player.order != this.player_shot && Math.abs(this.line_function[0]*player.posX+this.line_function[1]*player.posY+this.line_function[2])<=27
-      && Math.abs(player.posX-this.posX)>=Math.abs(player.posX-this.posX-this.persec[0])
-      && Math.abs(player.posY-this.posY)>=Math.abs(player.posY-this.posY-this.persec[1])){
+      && player.posX>=Math.min(this.posX, this.lastX)-27 && player.posX<=Math.max(this.posX, this.lastX)+27
+      && player.posY>=Math.min(this.posY, this.lastY)-27 && player.posY<=Math.max(this.posY, this.lastY)+27){
         player.state = 3;
-        player_score[this.player_shot]++;
+        aftermath_actions.push([this.player_shot, 1]);
         if(player.type_special_ammo!="normal"){
           dropout_power(player.posX, player.posY, player.type_special_ammo);
           player.type_special_ammo = "normal";

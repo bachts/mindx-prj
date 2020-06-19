@@ -4,6 +4,8 @@ let space_background;
 
 let ship1 = [], ship2 = [], ship3 = [], ship4 = [];
 
+let all_ships = [];
+
 let reverse_png, mine_png, scatter_png, laser_png;
 
 let game_Font;
@@ -40,3 +42,8 @@ function preload(){   // Lấy hình ảnh và kiểu chữ từ assets
   scatter_png = loadImage("assets/Power_ups/scatter_power_up.png")
   laser_png = loadImage("assets/Power_ups/laser_power_up.png")
 }
+
+all_ships.push(ship1);
+all_ships.push(ship2);
+all_ships.push(ship3);
+all_ships.push(ship4)

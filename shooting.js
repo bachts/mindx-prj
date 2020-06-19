@@ -1,10 +1,12 @@
 var players = [], flying_bullets = [], player_score = [], power_ups = [], mines = [];
 
+var aftermath_actions = [];
+
 var reverse_state = 0;
 
 var start_new_game, start_option;
 
-var countdown, end_round;
+var countdown, end_round, moving;
 
 var number_of_players = 4;
 
@@ -19,8 +21,9 @@ function setup() {
   begin_a_game = false;
   countdown = 200;
   end_round = 0;
+  moving = 0;
   
-  for(i=0;i<4;i++)
+  for(i=0;i<number_of_players;i++)
     player_score.push(0);
   players.push(new player1());
   players.push(new player2());
@@ -45,10 +48,6 @@ function draw(){
   stroke("blue");
   rect(20, 20, windowWidth-40, windowHeight-40, 5);
   pop()
-  for(i=0;i<4;i++){
-    textSize(16);
-    text(player_score[i], 20+i*20, 20);
-  }
   if(countdown>0){
     for(let player of players){
       player.display_ship();
@@ -93,7 +92,7 @@ function draw(){
     if(players_left<=1&&end_round<180)
       end_round++;
     else if(end_round==180){
-      winner = result();
+      scoreboard();
     }
   }
 }
