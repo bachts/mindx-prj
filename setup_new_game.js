@@ -39,7 +39,7 @@ function options_display(){
   button_music.size(100, 25);
   button_music.position(windowWidth/2-120, windowHeight/2);
   button_music.mouseClicked(function(){
-    
+
   });
 
   button_sound = createButton("SOUND");
@@ -49,7 +49,7 @@ function options_display(){
   pop()
 }
 
-function setup_new_game(number_of_players){
+function setup_new_game(){
   while(players.length>0){
     players.pop();
     player_score.pop();

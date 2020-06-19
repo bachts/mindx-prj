@@ -4,7 +4,9 @@ var reverse_state = 0;
 
 var start_new_game, start_option;
 
-var countdown;
+var countdown, end_round;
+
+var number_of_players = 4;
 
 function setup() {
 
@@ -16,6 +18,7 @@ function setup() {
   start_option = false;
   begin_a_game = false;
   countdown = 200;
+  end_round = 0;
   
   for(i=0;i<4;i++)
     player_score.push(0);
@@ -46,33 +49,51 @@ function draw(){
     textSize(16);
     text(player_score[i], 20+i*20, 20);
   }
-  if(countdown>0)
+  if(countdown>0){
+    for(let player of players){
+      player.display_ship();
+      player.display_ammo();
+    }
     countdown--;
-  if(countdown%60>=50&&countdown>0){
+  }
+  if(countdown%60>=40&&countdown>0){
     push();
-    fill(255);
-    text(int(countdown/60)+1, windowWidth/2, windowHeight/2);
+    fill(0);
+    textSize(24);
+    text(int(countdown/60)+1, windowWidth/2-12, windowHeight/2+14);
     pop();
   }
   if(countdown==0){
     for(let power of power_ups){
-      power.update();
+      if(end_round<180)
+        power.update();
       power.display();
     }
     for(let bullet of flying_bullets){
-      bullet.update();
+      if(end_round<180)
+        bullet.update();
       bullet.display();
     }
     for(let mine of mines){
-      mine.update();
+      if(end_round<180)
+        mine.update();
       mine.display();
     }
+    let players_left = 4;
     for(let player of players){
       if(player.state<=2){
-        player.update();
+        if(end_round<180)
+          player.update();
         player.display_ship();
         player.display_ammo();
       }
+      else
+        players_left--;
+    }
+    if(players_left<=1&&end_round<180)
+      end_round++;
+    else if(end_round==180){
+      winner = result();
     }
   }
 }
