@@ -2,12 +2,8 @@ function scoreboard(){
   push()
   imageMode(CENTER);
   fill(33, 55, 156);
-  if(moving/70>aftermath_actions.length+0.5){
-    moving = 0;
-    countdown = 200;
-    end_round = 0;
-    setup_new_round();
-  }
+  if(moving/70>aftermath_actions.length+0.7)
+    start_new_round();
   if(moving/70<aftermath_actions.length){
     let action = aftermath_actions[int(moving/70)];
     if(player_score[action[0]]+action[1]<0)

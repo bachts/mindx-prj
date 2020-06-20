@@ -19,6 +19,11 @@ function preload(){   // Lấy hình ảnh và kiểu chữ từ assets
   scatter_bullet_png = loadImage("assets/scatter_bullet.png")
   laser_bullet_png = loadImage("assets/laser_bullet.png")
 
+  reverse_png = loadImage("assets/Power_ups/reverse_power_up.png")
+  mine_png = loadImage("assets/Power_ups/mine_power_up.png")
+  scatter_png = loadImage("assets/Power_ups/scatter_power_up.png")
+  laser_png = loadImage("assets/Power_ups/laser_power_up.png")
+
   space_background = loadImage("assets/space_background.jpg")
 
   ship1.push(loadImage("assets/Ship1/ship1_start_state.png"))
@@ -36,14 +41,9 @@ function preload(){   // Lấy hình ảnh và kiểu chữ từ assets
   ship4.push(loadImage("assets/Ship4/ship4_start_state.png"))
   ship4.push(loadImage("assets/Ship4/ship4_damage_state.png"))
   ship4.push(loadImage("assets/Ship4/ship4_no_ship_state.png"))
-
-  reverse_png = loadImage("assets/Power_ups/reverse_power_up.png")
-  mine_png = loadImage("assets/Power_ups/mine_power_up.png")
-  scatter_png = loadImage("assets/Power_ups/scatter_power_up.png")
-  laser_png = loadImage("assets/Power_ups/laser_power_up.png")
 }
 
 all_ships.push(ship1);
 all_ships.push(ship2);
 all_ships.push(ship3);
-all_ships.push(ship4)
+all_ships.push(ship4);
