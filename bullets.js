@@ -36,8 +36,8 @@ function normal_bullets(x, y, rotation, number){
       let index = flying_bullets.indexOf(this);
       flying_bullets.splice(index, 1);
     }
-    this.posX += (this.persec[0] * 3);
-    this.posY += (this.persec[1] * 3);
+    this.posX += (this.persec[0] * 5);
+    this.posY += (this.persec[1] * 5);
   };
 
   this.display = function() {
@@ -159,8 +159,8 @@ function scatter_bullets(x, y, rotation, number){
       let index = flying_bullets.indexOf(this);
       flying_bullets.splice(index, 1);
     }
-    this.posX += (this.persec[0] * 3);
-    this.posY += (this.persec[1] * 3);
+    this.posX += (this.persec[0] * 5);
+    this.posY += (this.persec[1] * 5);
   };
 
   this.display = function() {

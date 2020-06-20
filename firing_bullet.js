@@ -17,52 +17,52 @@ function keyPressed() {
   if(keyCode==87){  // Bắn mỗi viên mỗi lần bấm của tàu 1 (Nút w)
     let player = players[0];
     if(player.special_ammo>0&&player.state<=1){
-      firing_bullet(player.posX, player.posY, player.rotation, 0, player.type_special_ammo);
+      firing_bullet(player.posX, player.posY, player.rotation, player.order, player.type_special_ammo);
       player.special_ammo--;
       if(player.special_ammo==0)
         player.type_special_ammo = "normal";
     }
     else if(player.normal_ammo>0&&player.state<=1){
-      firing_bullet(player.posX, player.posY, player.rotation, 0, "normal");
+      firing_bullet(player.posX, player.posY, player.rotation, player.order, player.type_special_ammo);
       player.normal_ammo--;
     }
   }
-  if(keyCode==86){  // Bắn mỗi viên mỗi lần bấm của tàu 2 (Nút v)
+  if(keyCode==220){  // Bắn mỗi viên mỗi lần bấm của tàu 2 (Nút \)
     let player = players[1];
     if(player.special_ammo>0&&player.state<=1){
-      firing_bullet(player.posX, player.posY, player.rotation, 1, player.type_special_ammo);
+      firing_bullet(player.posX, player.posY, player.rotation, player.order, player.type_special_ammo);
       player.special_ammo--;
       if(player.special_ammo==0)
         player.type_special_ammo = "normal";
     }
-    else if(player.normal_ammo!=0&&player.state<=1){
-      firing_bullet(player.posX, player.posY, player.rotation, 1, "normal");
+    else if(player.normal_ammo>0&&player.state<=1){
+      firing_bullet(player.posX, player.posY, player.rotation, player.order, player.type_special_ammo);
       player.normal_ammo--;
     }
   }
-  if(keyCode==75){  // Bắn mỗi viên mỗi lần bấm của tàu 3 (Nút k)
+  if(keyCode==75&&number_of_players>=3){  // Bắn mỗi viên mỗi lần bấm của tàu 3 (Nút k)
     let player = players[2];
     if(player.special_ammo>0&&player.state<=1){
-      firing_bullet(player.posX, player.posY, player.rotation, 2, player.type_special_ammo);
+      firing_bullet(player.posX, player.posY, player.rotation, player.order, player.type_special_ammo);
       player.special_ammo--;
       if(player.special_ammo==0)
         player.type_special_ammo = "normal";
     }
-    else if(player.normal_ammo!=0&&player.state<=1){
-      firing_bullet(player.posX, player.posY, player.rotation, 2, "normal");
+    else if(player.normal_ammo>0&&player.state<=1){
+      firing_bullet(player.posX, player.posY, player.rotation, player.order, player.type_special_ammo);
       player.normal_ammo--;
     }
   }
-  if(keyCode==220){  // Bắn mỗi viên mỗi lần bấm của tàu 4 (Nút \)
+  if(keyCode==86&&number_of_players==4){  // Bắn mỗi viên mỗi lần bấm của tàu 4 (Nút v)
     let player = players[3];
     if(player.special_ammo>0&&player.state<=1){
-      firing_bullet(player.posX, player.posY, player.rotation, 3, player.type_special_ammo);
+      firing_bullet(player.posX, player.posY, player.rotation, player.order, player.type_special_ammo);
       player.special_ammo--;
       if(player.special_ammo==0)
         player.type_special_ammo = "normal";
     }
-    else if(player.normal_ammo!=0&&player.state<=1){
-      firing_bullet(player.posX, player.posY, player.rotation, 3, "normal");
+    else if(player.normal_ammo>0&&player.state<=1){
+      firing_bullet(player.posX, player.posY, player.rotation, player.order, player.type_special_ammo);
       player.normal_ammo--;
     }
   }

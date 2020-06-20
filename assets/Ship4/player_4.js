@@ -24,7 +24,7 @@ function player4(){
   this.update = function(){
 
     if(keyIsPressed){
-      if(keyIsDown(221)){
+      if(keyIsDown(67)){
         if(!reverse_state){
           this.rotation = ((this.rotation+3>360) ? this.rotation+3-360 : this.rotation+3);
           let angle = TWO_PI*this.rotation/360.0;
@@ -36,7 +36,7 @@ function player4(){
           this.persec = [sin(angle), -cos(angle)];
         }
       }
-      if(keyIsDown(220)&&this.state==2){
+      if(keyIsDown(86)&&this.state==2){
         this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), windowWidth-30);
         this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5, 30), windowHeight-30);
       }

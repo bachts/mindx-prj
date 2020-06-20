@@ -121,7 +121,7 @@ function laser_power(x, y){
       this.rotation = 0;
   }
 
-  this.display = function(time_passed){
+  this.display = function(){
     push()
     translate(this.posX, this.posY);
     angleMode(DEGREES);

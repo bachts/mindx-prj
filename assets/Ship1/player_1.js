@@ -11,9 +11,9 @@ function player1(){ // Tàu 1
   this.time_out_of_ship = 0;                // Thời điểm phá nát rời khỏi tàu
 
   this.normal_ammo = 3;                     // Đạn bình thường ban đầu
-  this.special_ammo = 3;                    // Đạn đặc biệt ban đầu
+  this.special_ammo = 0;                    // Đạn đặc biệt ban đầu
   this.reload = 0;                          // Đếm thời gian để nạp 1 viên đạn bình thường
-  this.type_special_ammo = "laser"         // Loại đạn ban đầu
+  this.type_special_ammo = "normal"         // Loại đạn ban đầu
 
   this.order = 0;                           // Vị trí trong mảng
 

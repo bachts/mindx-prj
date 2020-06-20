@@ -2,10 +2,12 @@ function starting_menu(){
 
   push()
   game_name_display = createSpan("SPACE PARTY");
+  elements.push(game_name_display);
   game_name_display.size(100, 60);
   game_name_display.position(windowWidth/2 - 120, windowHeight/2 - 100);
 
   button_start = createButton("START GAME");
+  elements.push(button_start);
   button_start.size(160, 25);
   button_start.position(windowWidth/2 - 80, windowHeight/2 + 50);
   button_start.mouseClicked(function(){
@@ -18,6 +20,7 @@ function starting_menu(){
   });
 
   button_option = createButton("OPTIONS");
+  elements.push(button_option);
   button_option.size(120, 25);
   button_option.position(windowWidth/2 - 60, windowHeight/2 + 90);
   button_option.mouseClicked(function(){
@@ -108,7 +111,7 @@ function options_for_new_game(){
     button_begin.remove();
     button_choose_number_of_players.remove();
 
-    begin_a_game = true;
+    begin_new_game = true;
     loop();
   });
   pop()
