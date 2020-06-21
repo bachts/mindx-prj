@@ -57,7 +57,3 @@ function start_new_round(){
   }
   new_random_power_spawn(width/2, height/2);
 }
-
-// function mouseClicked(){
-//   if()
-// }

@@ -1,14 +1,12 @@
 var players = [], flying_bullets = [], player_score = [], power_ups = [], mines = [];
 var aftermath_actions = [];
-var elements = [];
 
 var music = true, sound = true;
 var game_setup_complete;
 var reverse_state;
-var setup_new_game, setup_option;
+var setup_new_game, setup_option, begin_new_game;
 var countdown, end_round, moving;
 var number_of_players = 2;
-var cameraX, cameraY;
 
 var height, width;
 
@@ -45,9 +43,9 @@ function draw(){
       push();
       cameraX = calculate_cameraX();
       cameraY = calculate_cameraY();
-      let scaling = calculate_scale();
-      let xOffset = cameraX - width/2;
-      let yOffset = cameraY - height/2;
+      scaling = Math.min(Math.min(calculate_scale_by_X(), calculate_scale_by_Y()), 1.5);
+      xOffset = cameraX - width/2;
+      yOffset = cameraY - height/2;
       scale(scaling);
       translate((width/2)/scaling, (height/2)/scaling);
       if(!game_setup_complete){
@@ -103,6 +101,10 @@ function draw(){
           }
           else
             players_left--;
+        }
+        if(mouseIsPressed){
+          noLoop();
+          pause_game();
         }
         if(players_left<=1&&end_round<180)
           end_round++;

@@ -1,6 +1,6 @@
 function scoreboard(){
   push()
-  scale(1);
+  scale(1/scaling);
   imageMode(CENTER);
   let col = color(0);
   col.setAlpha(180);
@@ -12,7 +12,7 @@ function scoreboard(){
     start_new_round();
   if(moving/70<aftermath_actions.length+0.5&&moving/70>=aftermath_actions.length){
     for(let i=0;i<number_of_players;i++){
-      rect(-300, number_of_players*30+i*60, 600, 60);
+      rect(-300, -number_of_players*30+i*60, 600, 60);
       push()
       translate(-280+player_score[i]*54, -number_of_players*30+i*60+30);
       rotate(HALF_PI);
@@ -42,7 +42,7 @@ function scoreboard(){
       }
       else{
         push()
-        translate(w-280+player_score[i]*54-(((moving%70>60)?60:moving%70)/60)*54, -number_of_players*30+i*60+30);
+        translate(-280+player_score[i]*54-(((moving%70>60)?60:moving%70)/60)*54, -number_of_players*30+i*60+30);
         rotate(HALF_PI);
         rotate(((moving%70>60)?60:moving%70)/5);
         image(all_ships[i][0], 0, 0);

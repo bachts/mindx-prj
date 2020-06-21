@@ -1,11 +1,11 @@
 function starting_menu(){
   game_name_display = createSpan("SPACE PARTY");
   game_name_display.size(100, 60);
-  game_name_display.position(width/2 - 120, height/2 - 100);
+  game_name_display.position(width/2-120, height/2-100);
 
   button_start = createButton("START GAME");
   button_start.size(160, 25);
-  button_start.position(width/2 - 80, height/2 + 50);
+  button_start.position(width/2-80, height/2+50);
   button_start.mouseClicked(function(){
     game_name_display.remove();
     button_start.remove();
@@ -16,7 +16,7 @@ function starting_menu(){
 
   button_option = createButton("OPTIONS");
   button_option.size(120, 25);
-  button_option.position(width/2 - 60, height/2 + 90);
+  button_option.position(width/2-60, height/2+90);
   button_option.mouseClicked(function(){
     game_name_display.remove();
     button_start.remove();
@@ -95,4 +95,22 @@ function options_for_new_game(){
     begin_new_game = true;
     loop();
   });
+}
+
+function pause_game(){
+
+  push()
+  let col = color(0);
+  col.setAlpha(180);
+  fill(col);
+  rect(-width/2, -height/2, width, height);
+  pop()
+
+  word_paused = createSpan("PAUSED")
+  word_paused.size(100, 60);
+  word_paused.position(width/2-120, height/2-100);
+
+  button_continue = createButton("CONTINUE");
+  button_continue.size(100, 25);
+  button_continue.position(width/2-50, height/2)
 }
