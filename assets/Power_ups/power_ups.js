@@ -7,7 +7,7 @@ function reverse_power(x, y){
 
   this.update = function(){
     for(let player of players){
-      if(player.state<=1 && len(player.posX, player.posY, this.posX, this.posY)<=18){
+      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=18){
         reverse_state = ((reverse_state) ? 0 : 1);
         let index = power_ups.indexOf(this);
         power_ups.splice(index, 1);
@@ -21,7 +21,7 @@ function reverse_power(x, y){
 
   this.display = function(){
     push()
-    translate(this.posX, this.posY);
+    translate(this.posX-cameraX, this.posY-cameraY);
     angleMode(DEGREES);
     rotate(this.rotation);
     angleMode(RADIANS);
@@ -40,7 +40,7 @@ function mine_power(x, y){
 
   this.update = function(){
     for(let player of players){
-      if(player.state<=1 && len(player.posX, player.posY, this.posX, this.posY)<=18){
+      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=18){
         player.special_ammo = 3;
         player.type_special_ammo = "mine";
         let index = power_ups.indexOf(this);
@@ -55,7 +55,7 @@ function mine_power(x, y){
 
   this.display = function(){
     push()
-    translate(this.posX, this.posY);
+    translate(this.posX-cameraX, this.posY-cameraY);
     angleMode(DEGREES);
     rotate(this.rotation);
     angleMode(RADIANS);
@@ -74,7 +74,7 @@ function scatter_power(x, y){
 
   this.update = function(){
     for(let player of players){
-      if(player.state<=1 && len(player.posX, player.posY, this.posX, this.posY)<=18){
+      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=18){
         player.special_ammo = 3;
         player.type_special_ammo = "scatter";
         let index = power_ups.indexOf(this);
@@ -89,7 +89,7 @@ function scatter_power(x, y){
 
   this.display = function(){
     push()
-    translate(this.posX, this.posY);
+    translate(this.posX-cameraX, this.posY-cameraY);
     angleMode(DEGREES);
     rotate(this.rotation);
     angleMode(RADIANS);
@@ -108,7 +108,7 @@ function laser_power(x, y){
 
   this.update = function(){
     for(let player of players){
-      if(player.state<=1 && len(player.posX, player.posY, this.posX, this.posY)<=18){
+      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=18){
         player.special_ammo = 3;
         player.type_special_ammo = "laser";
         let index = power_ups.indexOf(this);
@@ -123,7 +123,7 @@ function laser_power(x, y){
 
   this.display = function(){
     push()
-    translate(this.posX, this.posY);
+    translate(this.posX-cameraX, this.posY-cameraY);
     angleMode(DEGREES);
     rotate(this.rotation);
     angleMode(RADIANS);

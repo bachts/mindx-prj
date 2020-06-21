@@ -10,7 +10,7 @@ function normal_bullets(x, y, rotation, number){
 
   this.update = function() {
     for(let mine of mines){
-      if(len(mine.posX, mine.posY, this.posX, this.posY)<=12){
+      if(dist(mine.posX, mine.posY, this.posX, this.posY)<=12){
         mine.triggered = true;
         let index = flying_bullets.indexOf(this);
         flying_bullets.splice(index, 1);
@@ -18,7 +18,7 @@ function normal_bullets(x, y, rotation, number){
       }
     }
     for(let player of players){
-      if(player.state<=2 && len(player.posX, player.posY, this.posX, this.posY)<=17 && player.order!=this.player_shot){
+      if(player.state<=2 && dist(player.posX, player.posY, this.posX, this.posY)<=17 && player.order!=this.player_shot){
         player.state++;
         if(player.state==3){
           aftermath_actions.push([this.player_shot, 1]);
@@ -32,7 +32,7 @@ function normal_bullets(x, y, rotation, number){
         break;
       }
     }
-    if (this.posX<=27 || this.posX>=windowWidth-27 || this.posY<=27 || this.posY>=windowHeight-27){
+    if (this.posX<=27 || this.posX>=width-27 || this.posY<=27 || this.posY>=height-27){
       let index = flying_bullets.indexOf(this);
       flying_bullets.splice(index, 1);
     }
@@ -42,7 +42,7 @@ function normal_bullets(x, y, rotation, number){
 
   this.display = function() {
     push()
-    translate(this.posX, this.posY);
+    translate(this.posX-cameraX, this.posY-cameraY);
     rotate(this.angle);
     imageMode(CENTER);
     image(normal_bullet_png, 0, 0);
@@ -63,7 +63,7 @@ function mine_bullets(x, y, number){
   this.update = function() {
     if(!this.triggered){
       for(let player of players){
-        if(player.state<=1 && len(player.posX, player.posY, this.posX, this.posY)<=100 && player.order!=this.player_shot){
+        if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=100 && player.order!=this.player_shot){
           this.triggered = true;
           break;
         }
@@ -71,13 +71,13 @@ function mine_bullets(x, y, number){
     }
     else if(this.counting_to_explode>=25&&this.counting_to_explode<55){
       for(let mine of mines){
-        if(len(mine.posX, mine.posY, this.posX, this.posY)<=100 && !mine.triggered){
+        if(dist(mine.posX, mine.posY, this.posX, this.posY)<=100 && !mine.triggered){
           mine.triggered = true;
           mine.counting_to_explode = 25;
         }
       }
       for(let player of players){
-        if(player.state<=2 && len(player.posX, player.posY, this.posX, this.posY)<=100){
+        if(player.state<=2 && dist(player.posX, player.posY, this.posX, this.posY)<=100){
           player.state = 3;
           if(this.player_shot!=player.order)
             aftermath_actions.push([this.player_shot, 1]);
@@ -100,7 +100,7 @@ function mine_bullets(x, y, number){
 
   this.display = function() {
     push()
-    translate(this.posX, this.posY);
+    translate(this.posX-cameraX, this.posY-cameraY);
     if(!this.triggered){
       imageMode(CENTER);
       image(mine_bullet_png, 0, 0);
@@ -133,7 +133,7 @@ function scatter_bullets(x, y, rotation, number){
 
   this.update = function() {
     for(let mine of mines){
-      if(len(mine.posX, mine.posY, this.posX, this.posY)<=12){
+      if(dist(mine.posX, mine.posY, this.posX, this.posY)<=12){
         mine.triggered = true;
         let index = flying_bullets.indexOf(this);
         flying_bullets.splice(index, 1);
@@ -141,7 +141,7 @@ function scatter_bullets(x, y, rotation, number){
       }
     }
     for(let player of players){
-      if(player.state<=2 && len(player.posX, player.posY, this.posX, this.posY)<=17 && player.order!=this.player_shot){
+      if(player.state<=2 && dist(player.posX, player.posY, this.posX, this.posY)<=17 && player.order!=this.player_shot){
         player.state++;
         if(player.state==3){
           aftermath_actions.push([this.player_shot, 1]);
@@ -155,7 +155,7 @@ function scatter_bullets(x, y, rotation, number){
         break;
       }
     }
-    if (this.posX<=27 || this.posX>=windowWidth-27 || this.posY<=27 || this.posY>=windowHeight-27){
+    if (this.posX<=27 || this.posX>=width-27 || this.posY<=27 || this.posY>=height-27){
       let index = flying_bullets.indexOf(this);
       flying_bullets.splice(index, 1);
     }
@@ -165,7 +165,7 @@ function scatter_bullets(x, y, rotation, number){
 
   this.display = function() {
     push()
-    translate(this.posX, this.posY);
+    translate(this.posX-cameraX, this.posY-cameraY);
     rotate(this.angle);
     imageMode(CENTER);
     image(scatter_bullet_png, 0, 0);
@@ -184,7 +184,7 @@ function laser_bullets(x, y, rotation, number){
   this.lastX = this.posX;
   this.lastY = this.posY;
 
-  while(this.lastX>=0 && this.lastX<=windowWidth && this.lastY>=0 && this.lastY<=windowHeight){
+  while(this.lastX>=0 && this.lastX<=width && this.lastY>=0 && this.lastY<=height){
     this.lastX += this.persec[0]*20;
     this.lastY += this.persec[1]*20;
   }
@@ -226,7 +226,7 @@ function laser_bullets(x, y, rotation, number){
   this.display = function() {
     for(let i=0;i<this.time_running;i+=7){
       push()
-      translate(this.posX+i*this.persec[0], this.posY+i*this.persec[1]);
+      translate(this.posX+i*this.persec[0]-cameraX, this.posY+i*this.persec[1]-cameraY);
       rotate(this.angle);
       imageMode(CENTER);
       image(laser_bullet_png, 0, 0);

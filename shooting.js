@@ -8,6 +8,7 @@ var reverse_state;
 var setup_new_game, setup_option;
 var countdown, end_round, moving;
 var number_of_players = 2;
+var cameraX, cameraY;
 
 var height, width;
 
@@ -41,16 +42,24 @@ function draw(){
       options_for_new_game();
     }
     else{
-      scale(1.25);
+      push();
+      cameraX = calculate_cameraX();
+      cameraY = calculate_cameraY();
+      let scaling = calculate_scale();
+      let xOffset = cameraX - width/2;
+      let yOffset = cameraY - height/2;
+      scale(scaling);
+      translate((width/2)/scaling, (height/2)/scaling);
       if(!game_setup_complete){
         start_new_game();
         game_setup_complete = true;
       }
       push()
+      circle(0, 0, 10);
       strokeWeight(10);
       noFill();
       stroke("blue");
-      rect(20, 20, width-40, height-40, 5);
+      rect(20-(width/2)-xOffset, 20-(height/2)-yOffset, width-40, height-40, 5);
       pop()
       if(countdown>0){
         for(let player of players){
@@ -65,7 +74,7 @@ function draw(){
         push();
         fill(0);
         textSize(24);
-        text(int(countdown/60)+1, windowWidth/2-12, windowHeight/2+14);
+        text(int(countdown/60)+1, -12, 14);
         pop();
       }
       if(countdown==0){
@@ -100,6 +109,7 @@ function draw(){
         else if(end_round==180){
           scoreboard();
         }
+        pop()
       }
     }
   }

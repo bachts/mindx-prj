@@ -1,7 +1,7 @@
 function player1(){ // Tàu 1
 
-  this.posX = random(30, windowWidth-30);   // Tọa độ x ban đầu
-  this.posY = random(30, windowHeight-30);  // Tọa độ y ban đầu
+  this.posX = 30;   // Tọa độ x ban đầu
+  this.posY = 30;  // Tọa độ y ban đầu
 
   this.rotation = 0;                        // Góc theo DEGREE
   let angle = TWO_PI*this.rotation/360.0;   // Góc theo RADIAN
@@ -37,18 +37,18 @@ function player1(){ // Tàu 1
         }
       }
       if(keyIsDown(87)&&this.state==2){ // Nút w
-        this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), windowWidth-30);   // Cập nhật trạng thái đi nếu tàu bị phá
-        this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5, 30), windowHeight-30);  //
+        this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), width-30);   // Cập nhật trạng thái đi nếu tàu bị phá
+        this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5, 30), height-30);  //
       }
     }
 
     if(this.state<=1&&!this.knockback){
-      this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), windowWidth-30);   // 
-      this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5, 30), windowHeight-30);  //
+      this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), width-30);   // 
+      this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5, 30), height-30);  //
     }                                                                                     //
     else if(this.knockback){                                                              // Cập nhật vị trí mới của tàu 
-      this.posX = Math.min(Math.max(this.posX-this.persec[0]*1.5, 30), windowWidth-30);   //
-      this.posY = Math.min(Math.max(this.posY-this.persec[1]*1.5, 30), windowHeight-30);  //
+      this.posX = Math.min(Math.max(this.posX-this.persec[0]*1.5, 30), width-30);   //
+      this.posY = Math.min(Math.max(this.posY-this.persec[1]*1.5, 30), height-30);  //
       this.knockback--;                                                                   //
     }
 
@@ -74,7 +74,7 @@ function player1(){ // Tàu 1
 
   this.display_ship = function(){ // Vẽ tàu
     push()
-    translate(this.posX, this.posY);
+    translate(this.posX-cameraX, this.posY-cameraY);
     rotate(TWO_PI*this.rotation/360.0);
     imageMode(CENTER);
     image(ship1[this.state], 0, 0);
@@ -85,7 +85,7 @@ function player1(){ // Tàu 1
     if(this.state<=1){
       push()
       fill(255);
-      translate(this.posX, this.posY);
+      translate(this.posX-cameraX, this.posY-cameraY);
       angleMode(DEGREES);
       rotate(this.ammo_rotation);
       angleMode(RADIANS);
