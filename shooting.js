@@ -1,21 +1,18 @@
-var players = [], flying_bullets = [], player_score = [], power_ups = [], mines = [];
-var aftermath_actions = [];
-
 var music = true, sound = true;
 var game_setup_complete;
 var reverse_state;
 var setup_new_game, setup_option, begin_new_game;
-var countdown, end_round, moving;
+var countdown, end_round, end_round_time;
 var number_of_players = 2;
 
-var height, width;
+var game_Height, game_Width;
 
 function setup() {
 
   textFont(game_Font);
-  height = displayHeight;
-  width = displayWidth;
-  createCanvas(width, height);
+  game_Height = displayHeight;
+  game_Width = displayWidth;
+  createCanvas(game_Width, game_Height);
   frameRate(60);
 
   setup_new_game = false;
@@ -24,7 +21,7 @@ function setup() {
 }
 
 function draw(){
-  image(space_background, 0, 0, width, height);
+  image(space_background, 0, 0, game_Width, game_Height);
   if(!setup_new_game&&!setup_option){
     noLoop();
     starting_menu();
@@ -44,12 +41,12 @@ function draw(){
       cameraX = calculate_cameraX();
       cameraY = calculate_cameraY();
       scaling = Math.min(Math.min(calculate_scale_by_X(), calculate_scale_by_Y()), 1.5);
-      xOffset = cameraX - width/2;
-      yOffset = cameraY - height/2;
+      xOffset = cameraX - game_Width/2;
+      yOffset = cameraY - game_Height/2;
       scale(scaling);
-      translate((width/2)/scaling, (height/2)/scaling);
+      translate((game_Width/2)/scaling, (game_Height/2)/scaling);
       if(!game_setup_complete){
-        start_new_game();
+        new_game_Start();
         game_setup_complete = true;
       }
       push()
@@ -57,7 +54,7 @@ function draw(){
       strokeWeight(10);
       noFill();
       stroke("blue");
-      rect(20-(width/2)-xOffset, 20-(height/2)-yOffset, width-40, height-40, 5);
+      rect(20-(game_Width/2)-xOffset, 20-(game_Height/2)-yOffset, game_Width-40, game_Height-40, 5);
       pop()
       if(countdown>0){
         for(let player of players){
@@ -109,7 +106,7 @@ function draw(){
         if(players_left<=1&&end_round<180)
           end_round++;
         else if(end_round==180){
-          scoreboard();
+          Scoreboard();
         }
         pop()
       }

@@ -14,6 +14,8 @@ function firing_bullet(x, y, rotation, number, type){
 }
 
 function keyPressed() {
+
+
   if(keyCode==87){  // Bắn mỗi viên mỗi lần bấm của tàu 1 (Nút w)
     let player = players[0];
     if(player.special_ammo>0&&player.state<=1){

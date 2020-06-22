@@ -32,7 +32,7 @@ function normal_bullets(x, y, rotation, number){
         break;
       }
     }
-    if (this.posX<=27 || this.posX>=width-27 || this.posY<=27 || this.posY>=height-27){
+    if (this.posX<=27 || this.posX>=game_Width-27 || this.posY<=27 || this.posY>=game_Height-27){
       let index = flying_bullets.indexOf(this);
       flying_bullets.splice(index, 1);
     }
@@ -155,7 +155,7 @@ function scatter_bullets(x, y, rotation, number){
         break;
       }
     }
-    if (this.posX<=27 || this.posX>=width-27 || this.posY<=27 || this.posY>=height-27){
+    if (this.posX<=27 || this.posX>=game_Width-27 || this.posY<=27 || this.posY>=game_Height-27){
       let index = flying_bullets.indexOf(this);
       flying_bullets.splice(index, 1);
     }
@@ -184,7 +184,7 @@ function laser_bullets(x, y, rotation, number){
   this.lastX = this.posX;
   this.lastY = this.posY;
 
-  while(this.lastX>=0 && this.lastX<=width && this.lastY>=0 && this.lastY<=height){
+  while(this.lastX>=0 && this.lastX<=game_Width && this.lastY>=0 && this.lastY<=game_Height){
     this.lastX += this.persec[0]*20;
     this.lastY += this.persec[1]*20;
   }

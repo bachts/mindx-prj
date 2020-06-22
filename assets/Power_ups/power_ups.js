@@ -25,6 +25,14 @@ function reverse_power(x, y){
     angleMode(DEGREES);
     rotate(this.rotation);
     angleMode(RADIANS);
+    if(this.rotation%90>=0&&this.rotation%90<=20){
+      push()
+      noFill();
+      stroke(color(33, 55, 156));
+      strokeWeight(2);
+      circle(0, 0, (this.rotation%90)*2);
+      pop()
+    }
     imageMode(CENTER);
     image(reverse_png, 0, 0);
     pop()
@@ -59,6 +67,14 @@ function mine_power(x, y){
     angleMode(DEGREES);
     rotate(this.rotation);
     angleMode(RADIANS);
+    if(this.rotation%90>=0&&this.rotation%90<=20){
+      push()
+      noFill();
+      stroke(color(33, 55, 156));
+      strokeWeight(2);
+      circle(0, 0, (this.rotation%90)*2);
+      pop()
+    }
     imageMode(CENTER);
     image(mine_png, 0, 0);
     pop()
@@ -93,6 +109,14 @@ function scatter_power(x, y){
     angleMode(DEGREES);
     rotate(this.rotation);
     angleMode(RADIANS);
+    if(this.rotation%90>=0&&this.rotation%90<=20){
+      push()
+      noFill();
+      stroke(color(33, 55, 156));
+      strokeWeight(2);
+      circle(0, 0, (this.rotation%90)*2);
+      pop()
+    }
     imageMode(CENTER);
     image(scatter_png, 0, 0);
     pop()
@@ -127,6 +151,14 @@ function laser_power(x, y){
     angleMode(DEGREES);
     rotate(this.rotation);
     angleMode(RADIANS);
+    if(this.rotation%90>=0&&this.rotation%90<=20){
+      push()
+      noFill();
+      stroke(color(33, 55, 156));
+      strokeWeight(2);
+      circle(0, 0, (this.rotation%90)*2);
+      pop()
+    }
     imageMode(CENTER);
     image(laser_png, 0, 0);
     pop()

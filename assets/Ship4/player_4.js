@@ -1,6 +1,6 @@
 function player4(){
 
-  this.posX = width-30;
+  this.posX = game_Width-30;
   this.posY = 30;
 
   this.rotation = 0;
@@ -10,6 +10,7 @@ function player4(){
   this.state = 0;
   this.time_out_of_ship = 0;
 
+  this.ammo_rotation = 0;
   this.normal_ammo = 3;
   this.special_ammo = 0;
   this.reload = 0;
@@ -18,8 +19,6 @@ function player4(){
   this.order = 3;
 
   this.knockback = 0;
-
-  this.ammo_rotation = 0;
 
   this.update = function(){
 
@@ -37,18 +36,18 @@ function player4(){
         }
       }
       if(keyIsDown(86)&&this.state==2){
-        this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), width-30);
-        this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5, 30), height-30);
+        this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), game_Width-30);
+        this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5, 30), game_Height-30);
       }
     }
 
     if(this.state<=1&&!this.knockback){
-      this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), width-30);
-      this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5, 30), height-30);
+      this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), game_Width-30);
+      this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5, 30), game_Height-30);
     } 
     else if(this.knockback){
-      this.posX = Math.min(Math.max(this.posX-this.persec[0]*1.5, 30), width-30);
-      this.posY = Math.min(Math.max(this.posY-this.persec[1]*1.5, 30), height-30);
+      this.posX = Math.min(Math.max(this.posX-this.persec[0]*1.5, 30), game_Width-30);
+      this.posY = Math.min(Math.max(this.posY-this.persec[1]*1.5, 30), game_Height-30);
       this.knockback--;
     }
 
