@@ -20,20 +20,34 @@ function player2(){
 
   this.knockback = 0;
 
+  this.release_time = 0;
+  this.press_twice_ready = false;
+  this.dashed = false;
+  this.boosting = 0;
+
   this.update = function(){
 
     if(keyIsPressed){
       if(keyIsDown(221)){
-        if(!reverse_state){
+        if(this.press_twice_ready&&this.release_time<=12&&!this.dashed){
+          if(!reverse_state)
+            this.rotation = ((this.rotation+60>360) ? this.rotation+60-360 : this.rotation+60);
+          else
+            this.rotation = ((this.rotation-60<0) ? this.rotation-60+360 : this.rotation-60);
+          let angle = TWO_PI*this.rotation/360.0;
+          this.persec = [sin(angle), -cos(angle)];
+        if(!this.boosting)
+            this.boosting = 480;
+          this.posX = Math.min(Math.max(this.posX+this.persec[0]*12, 30), game_Width-30);
+          this.posY = Math.min(Math.max(this.posY+this.persec[1]*12, 30), game_Height-30);
+          this.dashed = true;
+        }
+        else if(!reverse_state)
           this.rotation = ((this.rotation+3>360) ? this.rotation+3-360 : this.rotation+3);
-          let angle = TWO_PI*this.rotation/360.0;
-          this.persec = [sin(angle), -cos(angle)];
-        }
-        else{
+        else
           this.rotation = ((this.rotation-3<0) ? this.rotation-3+360 : this.rotation-3);
-          let angle = TWO_PI*this.rotation/360.0;
-          this.persec = [sin(angle), -cos(angle)];
-        }
+        let angle = TWO_PI*this.rotation/360.0;
+        this.persec = [sin(angle), -cos(angle)];
       }
       if(keyIsDown(220)&&this.state==2){
         this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), game_Width-30);
@@ -41,13 +55,19 @@ function player2(){
       }
     }
 
+    if(this.state<=1&&this.press_twice_ready)
+      this.release_time++;
+    
+    if(this.boosting)
+      this.boosting--;
+
     if(this.state<=1&&!this.knockback){
-      this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), game_Width-30);
-      this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5, 30), game_Height-30);
-    } 
+      this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5*((this.boosting)? 2 : 1 ), 30), game_Width-30);
+      this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5*((this.boosting)? 2 : 1 ), 30), game_Height-30);
+    }
     else if(this.knockback){
-      this.posX = Math.min(Math.max(this.posX-this.persec[0]*1.5, 30), game_Width-30);
-      this.posY = Math.min(Math.max(this.posY-this.persec[1]*1.5, 30), game_Height-30);
+      this.posX = Math.min(Math.max(this.posX-this.persec[0]*1.5*((this.boosting)? 2 : 1 ), 30), game_Width-30);
+      this.posY = Math.min(Math.max(this.posY-this.persec[1]*1.5*((this.boosting)? 2 : 1 ), 30), game_Height-30);
       this.knockback--;
     }
 

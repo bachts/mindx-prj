@@ -20,20 +20,34 @@ function player1(){ // Tàu 1
 
   this.knockback = 0;                       // Bị lùi lại do đạn laze
 
+  this.release_time = 0;
+  this.press_twice_ready = false;
+  this.dashed = false;
+  this.boosting = 0;
+
   this.update = function(){ // Cập nhật trạng thái tàu
 
     if(keyIsPressed){
       if(keyIsDown(81)){ // Nút q
-        if(!reverse_state){
-          this.rotation = ((this.rotation+3>360) ? this.rotation+3-360 : this.rotation+3);  //
-          let angle = TWO_PI*this.rotation/360.0;                                           // Cập nhật hướng tàu sẽ đi nếu không đổi chiều
-          this.persec = [sin(angle), -cos(angle)];                                          //
+        if(this.press_twice_ready&&this.release_time<=12&&!this.dashed){
+          if(!reverse_state)
+            this.rotation = ((this.rotation+60>360) ? this.rotation+60-360 : this.rotation+60);
+          else
+            this.rotation = ((this.rotation-60<0) ? this.rotation-60+360 : this.rotation-60);
+          let angle = TWO_PI*this.rotation/360.0;
+          this.persec = [sin(angle), -cos(angle)];
+          if(!this.boosting)
+            this.boosting = 480;
+          this.posX = Math.min(Math.max(this.posX+this.persec[0]*12, 30), game_Width-30);
+          this.posY = Math.min(Math.max(this.posY+this.persec[1]*12, 30), game_Height-30);
+          this.dashed = true;
         }
-        else{
-          this.rotation = ((this.rotation-3<0) ? this.rotation-3+360 : this.rotation-3);    //
-          let angle = TWO_PI*this.rotation/360.0;                                           // Cập nhật hướng tàu sẽ đi nếu đổi chiều
-          this.persec = [sin(angle), -cos(angle)];                                          //
-        }
+        else if(!reverse_state)
+          this.rotation = ((this.rotation+3>360) ? this.rotation+3-360 : this.rotation+3);  // Cập nhật hướng tàu sẽ đi nếu không đổi chiều
+        else
+          this.rotation = ((this.rotation-3<0) ? this.rotation-3+360 : this.rotation-3);    // Cập nhật hướng tàu sẽ đi nếu đổi chiều
+        let angle = TWO_PI*this.rotation/360.0;
+        this.persec = [sin(angle), -cos(angle)];
       }
       if(keyIsDown(87)&&this.state==2){ // Nút w
         this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), game_Width-30);   // Cập nhật trạng thái đi nếu tàu bị phá
@@ -41,14 +55,20 @@ function player1(){ // Tàu 1
       }
     }
 
+    if(this.state<=1&&this.press_twice_ready)
+      this.release_time++;
+    
+    if(this.boosting)
+      this.boosting--;
+
     if(this.state<=1&&!this.knockback){
-      this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5, 30), game_Width-30);   // 
-      this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5, 30), game_Height-30);  //
-    }                                                                                     //
-    else if(this.knockback){                                                              // Cập nhật vị trí mới của tàu 
-      this.posX = Math.min(Math.max(this.posX-this.persec[0]*1.5, 30), game_Width-30);   //
-      this.posY = Math.min(Math.max(this.posY-this.persec[1]*1.5, 30), game_Height-30);  //
-      this.knockback--;                                                                   //
+      this.posX = Math.min(Math.max(this.posX+this.persec[0]*1.5*((this.boosting)? 2 : 1 ), 30), game_Width-30);   // 
+      this.posY = Math.min(Math.max(this.posY+this.persec[1]*1.5*((this.boosting)? 2 : 1 ), 30), game_Height-30);  //
+    }                                                                                                              //
+    else if(this.knockback){                                                                                       // Cập nhật vị trí mới của tàu 
+      this.posX = Math.min(Math.max(this.posX-this.persec[0]*1.5*((this.boosting)? 2 : 1 ), 30), game_Width-30);   //
+      this.posY = Math.min(Math.max(this.posY-this.persec[1]*1.5*((this.boosting)? 2 : 1 ), 30), game_Height-30);  //
+      this.knockback--;                                                                                            //
     }
 
     if(this.normal_ammo<3)  //

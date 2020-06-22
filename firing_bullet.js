@@ -14,8 +14,6 @@ function firing_bullet(x, y, rotation, number, type){
 }
 
 function keyPressed() {
-
-
   if(keyCode==87){  // Bắn mỗi viên mỗi lần bấm của tàu 1 (Nút w)
     let player = players[0];
     if(player.special_ammo>0&&player.state<=1){
@@ -67,5 +65,32 @@ function keyPressed() {
       firing_bullet(player.posX, player.posY, player.rotation, player.order, player.type_special_ammo);
       player.normal_ammo--;
     }
+  }
+}
+
+function keyReleased(){
+  if(keyCode==81){
+    let player = players[0];
+    player.dashed = false;
+    player.release_time = 0;
+    player.press_twice_ready = (player.press_twice_ready) ? false : true;
+  }
+  if(keyCode==221){
+    let player = players[1];
+    player.dashed = false;
+    player.release_time = 0;
+    player.press_twice_ready = (player.press_twice_ready) ? false : true;
+  }
+  if(keyCode==74&&number_of_players>=3){
+    let player = players[2];
+    player.dashed = false;
+    player.release_time = 0;
+    player.press_twice_ready = (player.press_twice_ready) ? false : true;
+  }
+  if(keyCode==67&&number_of_players==4){
+    let player = players[3];
+    player.dashed = false;
+    player.release_time = 0;
+    player.press_twice_ready = (player.press_twice_ready) ? false : true;
   }
 }

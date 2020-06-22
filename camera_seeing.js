@@ -4,7 +4,7 @@ var xOffset, yOffset;
 
 function calculate_cameraX(){
   let players_left = number_of_players;
-  let finalX = 0;
+  let sumX = 0;
   for(let player of players){
     if(player.state<=2)
       sumX += player.posX;
@@ -34,18 +34,16 @@ function calculate_cameraY(){
 
 function calculate_scale_by_X(){
   let max_dist_X = 0;
-  for(let player_index1 of players){
-    for(let player_index2 of players)
-      max_dist_X = Math.max(max_dist_X, Math.abs(player_index1.posX-player_index2.posX));
+  for(let player of players){
+    max_dist_X = Math.max(max_dist_X, Math.abs(player.posX-cameraX));
   }
-  return 0.8*(game_Width-40)/max_dist_X;
+  return 0.8*(game_Width-40)/(2*max_dist_X);
 }
 
 function calculate_scale_by_Y(){
   let max_dist_Y = 0;
-  for(let player_index1 of players){
-    for(let player_index2 of players)
-      max_dist_Y = Math.max(max_dist_Y, Math.abs(player_index1.posY-player_index2.posY));
+  for(let player of players){
+    max_dist_Y = Math.max(max_dist_Y, Math.abs(player.posY-cameraY));
   }
-  return 0.8*(game_Height-40)/max_dist_Y;
+  return 0.8*(game_Height-40)/(2*max_dist_Y);
 }
