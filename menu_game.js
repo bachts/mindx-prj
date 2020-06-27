@@ -10,7 +10,7 @@ function starting_menu(){
     game_name_display.remove();
     button_start.remove();
     button_option.remove();
-    setup_new_game = true;
+    player_setup = true;
     loop();
   });
 
@@ -61,7 +61,7 @@ function options_display(){
   });
 }
 
-function options_for_new_game(){
+function player_option(){
   button_back = createButton("BACK");
   button_back.size(80, 25);
   button_back.position(30, game_Height-60);
@@ -69,7 +69,8 @@ function options_for_new_game(){
     button_back.remove();
     button_begin.remove();
     button_choose_number_of_players.remove();
-    setup_new_game = false;
+    control_guidance.remove();
+    player_setup = false;
     loop();
   });
 
@@ -80,8 +81,75 @@ function options_for_new_game(){
     button_back.remove();
     button_begin.remove();
     button_choose_number_of_players.remove();
+    control_guidance.remove();
     let index = [1, 2, 0], number = [2, 3, 4];
     number_of_players = number[index[number.indexOf(number_of_players)]];
+    loop();
+  });
+
+  if(number_of_players==2)
+    control_guidance = createP(
+      "PLAYER 1:&emsp;TURN: Button 'q'&emsp;SHOOT: Button 'w'<br><br>PLAYER 2:&emsp;TURN: Button ']'&emsp;SHOOT: Button '\\'"
+    );
+  else if(number_of_players==3)
+    control_guidance = createP(
+      "PLAYER 1:&emsp;TURN: Button 'q'&emsp;SHOOT: Button 'w'<br><br>PLAYER 2:&emsp;TURN: Button ']'&emsp;SHOOT: Button '\\'<br><br>PLAYER 3:&emsp;TURN: Button 'j'&emsp;SHOOT: Button 'k'"
+    );
+  else if(number_of_players==4)
+    control_guidance = createP(
+      "PLAYER 1:&emsp;TURN: Button 'q'&emsp;SHOOT: Button 'w'<br><br>PLAYER 2:&emsp;TURN: Button ']'&emsp;SHOOT: Button '\\'<br><br>PLAYER 3:&emsp;TURN: Button 'j'&emsp;SHOOT: Button 'k'<br><br>PLAYER 4:&emsp;TURN: Button 'c'&emsp;SHOOT: Button 'v'"
+    );
+  control_guidance.size(600, 300);
+  control_guidance.position(game_Width/2-250, game_Height/2+10);
+
+  button_begin = createButton("NEXT >>");
+  button_begin.size(100, 40);
+  button_begin.position(game_Width-130, game_Height-67.5);
+  button_begin.mouseClicked(function(){
+    button_back.remove();
+    button_begin.remove();
+    button_choose_number_of_players.remove();
+    control_guidance.remove();
+    setup_new_game = true;
+    loop();
+  });
+}
+
+function options_for_new_game(){
+  button_back = createButton("BACK");
+  button_back.size(80, 25);
+  button_back.position(30, game_Height-60);
+  button_back.mouseClicked(function(){
+    button_back.remove();
+    button_type_match.remove();
+    button_advance_setting.remove();
+    button_begin.remove();
+    setup_new_game = false;
+    loop();
+  });
+
+  button_type_match = createButton(type[match_index] + " MATCH: " + number_of_wins[number_of_players-2][match_index] + " WINS");
+  button_type_match.size(300, 40);
+  button_type_match.position(game_Width/2-150, game_Height/2-30);
+  button_type_match.mouseClicked(function(){
+    button_back.remove();
+    button_type_match.remove();
+    button_advance_setting.remove();
+    button_begin.remove();
+    let index = [1, 2, 0];
+    match_index = index[match_index];
+    loop();
+  });
+
+  button_advance_setting = createButton("ADVANCE SETTING");
+  button_advance_setting.size(300, 40);
+  button_advance_setting.position(game_Width/2-150, game_Height/2+20);
+  button_advance_setting.mouseClicked(function(){
+    button_back.remove();
+    button_type_match.remove();
+    button_advance_setting.remove();
+    button_begin.remove();
+    advance_setting = true;
     loop();
   });
 
@@ -90,8 +158,9 @@ function options_for_new_game(){
   button_begin.position(game_Width-130, game_Height-67.5);
   button_begin.mouseClicked(function(){
     button_back.remove();
+    button_type_match.remove();
+    button_advance_setting.remove();
     button_begin.remove();
-    button_choose_number_of_players.remove();
     begin_new_game = true;
     loop();
   });
@@ -131,6 +200,8 @@ function pause_game(){
     setup_new_game = false;
     setup_option = false;
     begin_new_game = false;
+    advance_setting = false;
+    player_option = false;
     loop();
   });
 }

@@ -3,16 +3,28 @@ function reverse_power(x, y){
   this.posX = x;
   this.posY = y;
 
+  this.persec = [0, 0];
+
   this.rotation = 0;
 
   this.update = function(){
     for(let player of players){
-      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=18){
-        reverse_state = ((reverse_state) ? 0 : 1);
-        let index = power_ups.indexOf(this);
-        power_ups.splice(index, 1);
+      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=80){
+        if(dist(player.posX, player.posY, this.posX, this.posY)<=18){
+          reverse_state = ((reverse_state) ? 0 : 1);
+          let index = power_ups.indexOf(this);
+          power_ups.splice(index, 1);
+        }
+        let length = dist(player.posX, player.posY, this.posX, this.posY);
+        this.persec = [(player.posX-this.posX)*2/length, (player.posY-this.posY)*2/length];
+        break;
       }
+      else
+        this.persec = [0, 0];
     }
+    
+    this.posX += this.persec[0];
+    this.posY += this.persec[1];
 
     this.rotation++;
     if(this.rotation==360)
@@ -44,17 +56,29 @@ function mine_power(x, y){
   this.posX = x;
   this.posY = y;
 
+  this.persec = [0, 0];
+
   this.rotation = 0;
 
   this.update = function(){
     for(let player of players){
-      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=18){
-        player.special_ammo = 3;
-        player.type_special_ammo = "mine";
-        let index = power_ups.indexOf(this);
-        power_ups.splice(index, 1);
+      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=80){
+        if(dist(player.posX, player.posY, this.posX, this.posY)<=18){
+          player.special_ammo = 3;
+          player.type_special_ammo = "mine";
+          let index = power_ups.indexOf(this);
+          power_ups.splice(index, 1);
+        }
+        let length = dist(player.posX, player.posY, this.posX, this.posY);
+        this.persec = [(player.posX-this.posX)*2/length, (player.posY-this.posY)*2/length];
+        break;
       }
+      else
+        this.persec = [0, 0];
     }
+    
+    this.posX += this.persec[0];
+    this.posY += this.persec[1];
 
     this.rotation++;
     if(this.rotation==360)
@@ -86,17 +110,29 @@ function scatter_power(x, y){
   this.posX = x;
   this.posY = y;
 
+  this.persec = [0, 0];
+
   this.rotation = 0;
 
   this.update = function(){
     for(let player of players){
-      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=18){
-        player.special_ammo = 3;
-        player.type_special_ammo = "scatter";
-        let index = power_ups.indexOf(this);
-        power_ups.splice(index, 1);
+      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=80){
+        if(dist(player.posX, player.posY, this.posX, this.posY)<=18){
+          player.special_ammo = 3;
+          player.type_special_ammo = "scatter";
+          let index = power_ups.indexOf(this);
+          power_ups.splice(index, 1);
+        }
+        let length = dist(player.posX, player.posY, this.posX, this.posY);
+        this.persec = [(player.posX-this.posX)*2/length, (player.posY-this.posY)*2/length];
+        break;
       }
+      else
+        this.persec = [0, 0];
     }
+    
+    this.posX += this.persec[0];
+    this.posY += this.persec[1];
 
     this.rotation++;
     if(this.rotation==360)
@@ -128,17 +164,29 @@ function laser_power(x, y){
   this.posX = x;
   this.posY = y;
 
+  this.persec = [0, 0];
+
   this.rotation = 0;
 
   this.update = function(){
     for(let player of players){
-      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=18){
-        player.special_ammo = 3;
-        player.type_special_ammo = "laser";
-        let index = power_ups.indexOf(this);
-        power_ups.splice(index, 1);
+      if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=80){
+        if(dist(player.posX, player.posY, this.posX, this.posY)<=18){
+          player.special_ammo = 3;
+          player.type_special_ammo = "laser";
+          let index = power_ups.indexOf(this);
+          power_ups.splice(index, 1);
+        }
+        let length = dist(player.posX, player.posY, this.posX, this.posY);
+        this.persec = [(player.posX-this.posX)*2/length, (player.posY-this.posY)*2/length];
+        break;
       }
+      else
+        this.persec = [0, 0];
     }
+    
+    this.posX += this.persec[0];
+    this.posY += this.persec[1];
 
     this.rotation++;
     if(this.rotation==360)

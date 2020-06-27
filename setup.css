@@ -24,6 +24,13 @@ span{
     font-size: 50px;
 }
 
+p{
+    text-shadow: 0 2px black;
+    font-family: gamingFont;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+}
+
 button{
     display: inline-block;
     text-shadow: 0 2px black;
