@@ -1,4 +1,5 @@
 var players = [], flying_bullets = [], player_score = [], power_ups = [], mines = [];
+var advance_setting_state = [false, false];
 var aftermath_actions = [];
 
 function new_game_Start(){

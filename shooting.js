@@ -52,7 +52,8 @@ function draw(){
         options_for_new_game();
       }
       else if(advance_setting){
-
+        noLoop();
+        advance_options();
       }
       else if(begin_new_game){
         push();

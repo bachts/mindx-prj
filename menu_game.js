@@ -1,11 +1,12 @@
 function starting_menu(){
   game_name_display = createSpan("SPACE PARTY");
+  game_name_display.addClass("displaying");
   game_name_display.size(100, 60);
-  game_name_display.position(game_Width/2-120, game_Height/2-100);
+  game_name_display.position(game_Width/2-165, game_Height/2-200);
 
   button_start = createButton("START GAME");
-  button_start.size(160, 25);
-  button_start.position(game_Width/2-80, game_Height/2+50);
+  button_start.size(300, 50);
+  button_start.position(game_Width/2-150, game_Height/2+50);
   button_start.mouseClicked(function(){
     game_name_display.remove();
     button_start.remove();
@@ -15,8 +16,8 @@ function starting_menu(){
   });
 
   button_option = createButton("OPTIONS");
-  button_option.size(120, 25);
-  button_option.position(game_Width/2-60, game_Height/2+90);
+  button_option.size(300, 50);
+  button_option.position(game_Width/2-150, game_Height/2+120);
   button_option.mouseClicked(function(){
     game_name_display.remove();
     button_start.remove();
@@ -28,8 +29,8 @@ function starting_menu(){
 
 function options_display(){
   button_back = createButton("BACK");
-  button_back.size(80, 25);
-  button_back.position(30, game_Height-60);
+  button_back.size(130, 50);
+  button_back.position(60, game_Height-100);
   button_back.mouseClicked(function(){
     button_back.remove();
     button_music.remove();
@@ -39,8 +40,8 @@ function options_display(){
   });
 
   button_music = createButton("MUSIC: " + ((music) ? "ON" : "OFF"));
-  button_music.size(150, 25);
-  button_music.position(game_Width/2-170, game_Height/2);
+  button_music.size(240, 50);
+  button_music.position(game_Width/2-300, game_Height/2-25);
   button_music.mouseClicked(function(){
     button_back.remove();
     button_music.remove();
@@ -50,8 +51,8 @@ function options_display(){
   });
 
   button_sound = createButton("SOUND: " + ((sound) ? "ON" : "OFF"));
-  button_sound.size(150, 25);
-  button_sound.position(game_Width/2+20, game_Height/2);
+  button_sound.size(240, 50);
+  button_sound.position(game_Width/2+60, game_Height/2-25);
   button_sound.mouseClicked(function(){
     button_back.remove();
     button_music.remove();
@@ -63,8 +64,8 @@ function options_display(){
 
 function player_option(){
   button_back = createButton("BACK");
-  button_back.size(80, 25);
-  button_back.position(30, game_Height-60);
+  button_back.size(130, 50);
+  button_back.position(60, game_Height-100);
   button_back.mouseClicked(function(){
     button_back.remove();
     button_begin.remove();
@@ -75,8 +76,8 @@ function player_option(){
   });
 
   button_choose_number_of_players = createButton("PLAYERS: " + String(number_of_players) + "-PLAYERS");
-  button_choose_number_of_players.size(300, 60);
-  button_choose_number_of_players.position(game_Width/2-150, game_Height/2-80);
+  button_choose_number_of_players.size(400, 60);
+  button_choose_number_of_players.position(game_Width/2-200, game_Height/2-180);
   button_choose_number_of_players.mouseClicked(function(){
     button_back.remove();
     button_begin.remove();
@@ -89,22 +90,22 @@ function player_option(){
 
   if(number_of_players==2)
     control_guidance = createP(
-      "PLAYER 1:&emsp;TURN: Button 'q'&emsp;SHOOT: Button 'w'<br><br>PLAYER 2:&emsp;TURN: Button ']'&emsp;SHOOT: Button '\\'"
+      "PLAYER 1:&emsp;TURN: Button 'q'&emsp;SHOOT: Button 'w'<br><br><br>PLAYER 2:&emsp;TURN: Button ']'&emsp;SHOOT: Button '\\'"
     );
   else if(number_of_players==3)
     control_guidance = createP(
-      "PLAYER 1:&emsp;TURN: Button 'q'&emsp;SHOOT: Button 'w'<br><br>PLAYER 2:&emsp;TURN: Button ']'&emsp;SHOOT: Button '\\'<br><br>PLAYER 3:&emsp;TURN: Button 'j'&emsp;SHOOT: Button 'k'"
+      "PLAYER 1:&emsp;TURN: Button 'q'&emsp;SHOOT: Button 'w'<br><br><br>PLAYER 2:&emsp;TURN: Button ']'&emsp;SHOOT: Button '\\'<br><br><br>PLAYER 3:&emsp;TURN: Button 'j'&emsp;SHOOT: Button 'k'"
     );
   else if(number_of_players==4)
     control_guidance = createP(
-      "PLAYER 1:&emsp;TURN: Button 'q'&emsp;SHOOT: Button 'w'<br><br>PLAYER 2:&emsp;TURN: Button ']'&emsp;SHOOT: Button '\\'<br><br>PLAYER 3:&emsp;TURN: Button 'j'&emsp;SHOOT: Button 'k'<br><br>PLAYER 4:&emsp;TURN: Button 'c'&emsp;SHOOT: Button 'v'"
+      "PLAYER 1:&emsp;TURN: Button 'q'&emsp;SHOOT: Button 'w'<br><br><br>PLAYER 2:&emsp;TURN: Button ']'&emsp;SHOOT: Button '\\'<br><br><br>PLAYER 3:&emsp;TURN: Button 'j'&emsp;SHOOT: Button 'k'<br><br><br>PLAYER 4:&emsp;TURN: Button 'c'&emsp;SHOOT: Button 'v'"
     );
-  control_guidance.size(600, 300);
-  control_guidance.position(game_Width/2-250, game_Height/2+10);
+  control_guidance.size(800, 300);
+  control_guidance.position(game_Width/2-380, game_Height/2-40);
 
   button_begin = createButton("NEXT >>");
-  button_begin.size(100, 40);
-  button_begin.position(game_Width-130, game_Height-67.5);
+  button_begin.size(170, 50);
+  button_begin.position(game_Width-200, game_Height-100);
   button_begin.mouseClicked(function(){
     button_back.remove();
     button_begin.remove();
@@ -117,8 +118,8 @@ function player_option(){
 
 function options_for_new_game(){
   button_back = createButton("BACK");
-  button_back.size(80, 25);
-  button_back.position(30, game_Height-60);
+  button_back.size(130, 50);
+  button_back.position(60, game_Height-100);
   button_back.mouseClicked(function(){
     button_back.remove();
     button_type_match.remove();
@@ -129,8 +130,8 @@ function options_for_new_game(){
   });
 
   button_type_match = createButton(type[match_index] + " MATCH: " + number_of_wins[number_of_players-2][match_index] + " WINS");
-  button_type_match.size(300, 40);
-  button_type_match.position(game_Width/2-150, game_Height/2-30);
+  button_type_match.size(500, 50);
+  button_type_match.position(game_Width/2-250, game_Height/2-100);
   button_type_match.mouseClicked(function(){
     button_back.remove();
     button_type_match.remove();
@@ -142,8 +143,8 @@ function options_for_new_game(){
   });
 
   button_advance_setting = createButton("ADVANCE SETTING");
-  button_advance_setting.size(300, 40);
-  button_advance_setting.position(game_Width/2-150, game_Height/2+20);
+  button_advance_setting.size(500, 50);
+  button_advance_setting.position(game_Width/2-250, game_Height/2+50);
   button_advance_setting.mouseClicked(function(){
     button_back.remove();
     button_type_match.remove();
@@ -154,8 +155,8 @@ function options_for_new_game(){
   });
 
   button_begin = createButton("BEGIN >>");
-  button_begin.size(100, 40);
-  button_begin.position(game_Width-130, game_Height-67.5);
+  button_begin.size(180, 50);
+  button_begin.position(game_Width-210, game_Height-100);
   button_begin.mouseClicked(function(){
     button_back.remove();
     button_type_match.remove();
@@ -164,6 +165,39 @@ function options_for_new_game(){
     begin_new_game = true;
     loop();
   });
+}
+
+function advance_options(){
+  button_back = createButton("BACK");
+  button_back.size(130, 50);
+  button_back.position(60, game_Height-100);
+  button_back.mouseClicked(function(){
+    button_back.remove();
+    display.remove();
+    advance_setting = false;
+    loop();
+  });
+
+  options = ["STARTING POWER:", "TRIPPLE POWER:"];
+  let display = [];
+
+  for(let i=0;i<options.length;i++){
+    let describe = createSpan(options[i]);
+    describe.size(250, 25);
+    describe.position(game_Width/2-270, 400+i*70);
+
+    let state = createButton((advance_setting_state[i]) ? "ON" : "OFF");
+    state.size(140, 50);
+    state.position(game_Width/2+20, 400+i*70-25);
+    state.mouseClicked(function(){
+      button_back.remove();
+      display.remove();
+      advance_setting_state[i] = (advance_setting_state[i]) ? false : true;
+      loop();
+    });
+
+    display.push([describe, state]);
+  }
 }
 
 function pause_game(){
@@ -177,12 +211,13 @@ function pause_game(){
   pop()
 
   word_paused = createSpan("PAUSED");
-  word_paused.size(100, 60);
-  word_paused.position(game_Width/2-145, game_Height/2-100);
+  word_paused.addClass("displaying");
+  word_paused.size(500, 60);
+  word_paused.position(game_Width/2-200, game_Height/2-120);
 
   button_continue = createButton("CONTINUE");
-  button_continue.size(120, 25);
-  button_continue.position(game_Width/2+20, game_Height/2);
+  button_continue.size(180, 50);
+  button_continue.position(game_Width/2+60, game_Height/2+30);
   button_continue.mouseClicked(function(){
     word_paused.remove();
     button_continue.remove();
@@ -191,8 +226,8 @@ function pause_game(){
   });
 
   button_return_to_menu = createButton("RETURN TO MENU");
-  button_return_to_menu.size(200, 25)
-  button_return_to_menu.position(game_Width/2-220, game_Height/2);
+  button_return_to_menu.size(300, 50)
+  button_return_to_menu.position(game_Width/2-360, game_Height/2+30);
   button_return_to_menu.mouseClicked(function(){
     word_paused.remove();
     button_continue.remove();
@@ -201,7 +236,7 @@ function pause_game(){
     setup_option = false;
     begin_new_game = false;
     advance_setting = false;
-    player_option = false;
+    player_setup = false;
     loop();
   });
 }

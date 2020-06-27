@@ -15,16 +15,16 @@ function calculate_camera(){
   else if(coord_player.length==2)
     return [Math.max(100, Math.min((coord_player[0][0]+coord_player[1][0])/2, game_Width-100)), Math.max(100, Math.min((coord_player[0][1]+coord_player[1][1])/2, game_Height-100))];
   else if(coord_player.length>=3){
-    let distX = 0, x1 = 0, x2 = 0;
-    let distY = 0, y1 = 0, y2 = 0;
+    let distX = 0, x1, x2;
+    let distY = 0, y1, y2;
     for(let index1 of coord_player){
       for(let index2 of coord_player){
-        if(distX<Math.abs(index1[0]-index2[0])){
+        if(distX<=Math.abs(index1[0]-index2[0])){
           distX = Math.abs(index1[0]-index2[0]);
           x1 = index1[0];
           x2 = index2[0];
         }
-        if(distY<Math.abs(index1[1]-index2[1])){
+        if(distY<=Math.abs(index1[1]-index2[1])){
           distY = Math.abs(index1[1]-index2[1]);
           y1 = index1[1];
           y2 = index2[1];

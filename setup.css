@@ -18,17 +18,22 @@ body{
 
 span{
     display: inline-block;
-    color: rgb(255, 68, 0);
-    text-shadow: 0 6px black;
     font-family: gamingFont;
-    font-size: 50px;
+    color: white;
+    text-shadow: 0 2px black;
+}
+
+span.displaying{
+    color: rgb(255, 68, 0);
+    font-size: 70px;
+    text-shadow: 0 6px black;
 }
 
 p{
     text-shadow: 0 2px black;
     font-family: gamingFont;
     color: rgb(255, 255, 255);
-    font-size: 12px;
+    font-size: 18px;
 }
 
 button{
@@ -44,6 +49,7 @@ button{
     cursor: pointer;
     outline: none;
     box-shadow: 0 6px rgb(128, 34, 0);
+    font-size: 20px;
 }
 
 button:hover{
