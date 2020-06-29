@@ -64,7 +64,7 @@ function mine_power(x, y){
     for(let player of players){
       if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=80){
         if(dist(player.posX, player.posY, this.posX, this.posY)<=18){
-          player.special_ammo = 3;
+          player.special_ammo = (!advance_setting_state["TRIPPLE POWER:"]) ? 1 : 3;
           player.type_special_ammo = "mine";
           let index = power_ups.indexOf(this);
           power_ups.splice(index, 1);
@@ -118,7 +118,7 @@ function scatter_power(x, y){
     for(let player of players){
       if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=80){
         if(dist(player.posX, player.posY, this.posX, this.posY)<=18){
-          player.special_ammo = 3;
+          player.special_ammo = (!advance_setting_state["TRIPPLE POWER:"]) ? 1 : 3;
           player.type_special_ammo = "scatter";
           let index = power_ups.indexOf(this);
           power_ups.splice(index, 1);
@@ -172,7 +172,7 @@ function laser_power(x, y){
     for(let player of players){
       if(player.state<=1 && dist(player.posX, player.posY, this.posX, this.posY)<=80){
         if(dist(player.posX, player.posY, this.posX, this.posY)<=18){
-          player.special_ammo = 3;
+          player.special_ammo = (!advance_setting_state["TRIPPLE POWER:"]) ? 1 : 3;
           player.type_special_ammo = "laser";
           let index = power_ups.indexOf(this);
           power_ups.splice(index, 1);

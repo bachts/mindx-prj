@@ -1,5 +1,12 @@
 var players = [], flying_bullets = [], player_score = [], power_ups = [], mines = [];
-var advance_setting_state = [false, false];
+var advance_setting_state = {"START WITH SHIELD:" : false,
+                            "POWERUPS:" : false,
+                            "STARTING POWER:" : 0,
+                            "TRIPPLE POWER:" : false,
+                            "SUPER DASH:" : false
+};
+var power_type = ["normal", "laser", "mine", "scatter", "side-cannons", "random"];
+var chosen;
 var aftermath_actions = [];
 
 function new_game_Start(){
@@ -8,6 +15,11 @@ function new_game_Start(){
   end_round = 0;
   end_round_time = 0;
   reverse_state = 0;
+
+  if(power_type[advance_setting_state["STARTING POWER:"]]!="random")
+    chosen = power_type[advance_setting_state["STARTING POWER:"]];
+  else
+    chosen = power_type[Math.round(random(1, 5))];
 
   while(mines.length>0)
     mines.pop();
@@ -36,7 +48,8 @@ function new_game_Start(){
     player_score.push(0);
   }
 
-  new_random_power_spawn(game_Width/2, game_Height/2);
+  if(advance_setting_state["POWERUPS"])
+    new_random_power_spawn(game_Width/2, game_Height/2);
 }
 
 function new_round_Start(){
@@ -45,6 +58,11 @@ function new_round_Start(){
   countdown = 200;
   end_round = 0;
   reverse_state = 0;
+
+  if(power_type[advance_setting_state["STARTING POWER:"]]!="random")
+    chosen = power_type[advance_setting_state["STARTING POWER:"]];
+  else
+    chosen = power_type[Math.round(random(1, 5))];
 
   while(players.length>0)
     players.pop();
@@ -65,5 +83,6 @@ function new_round_Start(){
     players.push(new player4());
   }
 
-  new_random_power_spawn(game_Width/2, game_Height/2);
+  if(advance_setting_state["POWERUPS"])
+    new_random_power_spawn(game_Width/2, game_Height/2);
 }

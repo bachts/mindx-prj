@@ -2,9 +2,11 @@ let normal_bullet_png, mine_bullet_png, scatter_bullet_png, laser_bullet_png;
 
 let space_background;
 
-let ship1 = [], ship2 = [], ship3 = [], ship4 = [];
+let boosts_png = [];
 
-let all_ships = [];
+let pew_sound;
+
+let all_ships = [[], [], [], []];
 
 let reverse_png, mine_png, scatter_png, laser_png;
 
@@ -24,26 +26,27 @@ function preload(){   // Lấy hình ảnh và kiểu chữ từ assets
   scatter_png = loadImage("assets/Power_ups/scatter_power_up.png")
   laser_png = loadImage("assets/Power_ups/laser_power_up.png")
 
+  side_cannons_png = loadImage("assets/side_cannons.png");
+  boosts_png.push(loadImage("assets/boosting_0.png"));
+  boosts_png.push(loadImage("assets/boosting_1.png"));
+
   space_background = loadImage("assets/space_background.jpg")
 
-  ship1.push(loadImage("assets/Ship1/ship1_start_state.png"))
-  ship1.push(loadImage("assets/Ship1/ship1_damage_state.png"))
-  ship1.push(loadImage("assets/Ship1/ship1_no_ship_state.png"))
+  all_ships[0].push(loadImage("assets/Ship1/ship1_start_state.png"))
+  all_ships[0].push(loadImage("assets/Ship1/ship1_damage_state.png"))
+  all_ships[0].push(loadImage("assets/Ship1/ship1_no_ship_state.png"))
 
-  ship2.push(loadImage("assets/Ship2/ship2_start_state.png"))
-  ship2.push(loadImage("assets/Ship2/ship2_damage_state.png"))
-  ship2.push(loadImage("assets/Ship2/ship2_no_ship_state.png"))
+  all_ships[1].push(loadImage("assets/Ship2/ship2_start_state.png"))
+  all_ships[1].push(loadImage("assets/Ship2/ship2_damage_state.png"))
+  all_ships[1].push(loadImage("assets/Ship2/ship2_no_ship_state.png"))
 
-  ship3.push(loadImage("assets/Ship3/ship3_start_state.png"))
-  ship3.push(loadImage("assets/Ship3/ship3_damage_state.png"))
-  ship3.push(loadImage("assets/Ship3/ship3_no_ship_state.png"))
+  all_ships[2].push(loadImage("assets/Ship3/ship3_start_state.png"))
+  all_ships[2].push(loadImage("assets/Ship3/ship3_damage_state.png"))
+  all_ships[2].push(loadImage("assets/Ship3/ship3_no_ship_state.png"))
 
-  ship4.push(loadImage("assets/Ship4/ship4_start_state.png"))
-  ship4.push(loadImage("assets/Ship4/ship4_damage_state.png"))
-  ship4.push(loadImage("assets/Ship4/ship4_no_ship_state.png"))
+  all_ships[3].push(loadImage("assets/Ship4/ship4_start_state.png"))
+  all_ships[3].push(loadImage("assets/Ship4/ship4_damage_state.png"))
+  all_ships[3].push(loadImage("assets/Ship4/ship4_no_ship_state.png"))
+
+  pew_sound = loadSound("assets/pew_sound.mp3");
 }
-
-all_ships.push(ship1);
-all_ships.push(ship2);
-all_ships.push(ship3);
-all_ships.push(ship4);

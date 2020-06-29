@@ -173,30 +173,61 @@ function advance_options(){
   button_back.position(60, game_Height-100);
   button_back.mouseClicked(function(){
     button_back.remove();
-    display.remove();
+    while(display.length>0){
+      display[0].remove();
+      display.splice(0, 1);
+    }
     advance_setting = false;
     loop();
   });
 
-  options = ["STARTING POWER:", "TRIPPLE POWER:"];
+  push()
+  fill(204, 57, 4);
+  rect(200, 100, game_Width-400, game_Height-200, 20);
+  noFill();
+  stroke(color("white"));
+  strokeWeight(20);
+  rect(250, 150, game_Width-500, game_Height-300, 20);
+  pop()
+
+  let options = ["START WITH SHIELD:", "POWERUPS:", "STARTING POWER:", "TRIPPLE POWER:", "SUPER DASH:"];
   let display = [];
 
   for(let i=0;i<options.length;i++){
     let describe = createSpan(options[i]);
-    describe.size(250, 25);
-    describe.position(game_Width/2-270, 400+i*70);
+    describe.size(300, 25);
+    describe.position(game_Width/2-230, 230+i*70);
 
-    let state = createButton((advance_setting_state[i]) ? "ON" : "OFF");
+    let state;
+    if(options[i]!="STARTING POWER:"){
+      state = createButton((advance_setting_state[options[i]]) ? "ON" : "OFF");
+      state.mouseClicked(function(){
+        button_back.remove();
+        while(display.length>0){
+          display[0].remove();
+          display.splice(0, 1);
+        }
+        advance_setting_state[options[i]] = (advance_setting_state[options[i]]) ? false : true;
+        loop();
+      });
+    }
+    else{
+      state = createButton(power_type[advance_setting_state[options[i]]]);
+      state.mouseClicked(function(){
+        button_back.remove();
+        while(display.length>0){
+          display[0].remove();
+          display.splice(0, 1);
+        }
+        advance_setting_state[options[i]] = (advance_setting_state[options[i]]+1)%6;
+        loop();
+      });
+    }
     state.size(140, 50);
-    state.position(game_Width/2+20, 400+i*70-25);
-    state.mouseClicked(function(){
-      button_back.remove();
-      display.remove();
-      advance_setting_state[i] = (advance_setting_state[i]) ? false : true;
-      loop();
-    });
+    state.position(game_Width/2+80, 230+i*70-25);
 
-    display.push([describe, state]);
+    display.push(describe);
+    display.push(state);
   }
 }
 

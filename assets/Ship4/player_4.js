@@ -7,14 +7,23 @@ function player4(){
   let angle = TWO_PI*this.rotation/360.0;
   this.persec = [sin(angle), -cos(angle)];
 
-  this.state = 0;
+  this.state = (!advance_setting_state["START WITH SHIELD:"]) ? 1 : 0;
   this.time_out_of_ship = 0;
+  this.side_cannons = false;
 
   this.ammo_rotation = 0;
   this.normal_ammo = 3;
-  this.special_ammo = 0;
+
+  this.type_special_ammo = chosen;
+
+  if(advance_setting_state["STARTING POWER:"]==0)
+    this.special_ammo = 0;
+  else if(!advance_setting_state["TRIPPLE POWER:"])
+    this.special_ammo = 1;
+  else
+    this.special_ammo = 3;
+
   this.reload = 0;
-  this.type_special_ammo = "normal"
 
   this.order = 3;
 
@@ -29,15 +38,15 @@ function player4(){
 
     if(keyIsPressed){
       if(keyIsDown(67)){
-        if(this.press_twice_ready&&this.release_time<=12&&!this.dashed){
+        if(this.press_twice_ready&&this.release_time<=12&&!this.dashed&&this.state<2){
           if(!reverse_state)
-            this.rotation = ((this.rotation+60>360) ? this.rotation+60-360 : this.rotation+60);
+            this.rotation = ((this.rotation+90>360) ? this.rotation+90-360 : this.rotation+90);
           else
-            this.rotation = ((this.rotation-60<0) ? this.rotation-60+360 : this.rotation-60);
+            this.rotation = ((this.rotation-90<0) ? this.rotation-90+360 : this.rotation-90);
           let angle = TWO_PI*this.rotation/360.0;
           this.persec = [sin(angle), -cos(angle)];
           if(!this.boosting)
-            this.boosting = 480;
+            this.boosting = (advance_setting_state["SUPER DASH:"])? 480 : 60;
           this.posX = Math.min(Math.max(this.posX+this.persec[0]*12, 30), game_Width-30);
           this.posY = Math.min(Math.max(this.posY+this.persec[1]*12, 30), game_Height-30);
           this.dashed = true;
@@ -96,7 +105,11 @@ function player4(){
     translate(this.posX-cameraX, this.posY-cameraY);
     rotate(TWO_PI*this.rotation/360.0);
     imageMode(CENTER);
-    image(ship4[this.state], 0, 0);
+    if(this.side_cannons&&this.state<2)
+      image(side_cannons_png, 0, 0);
+    image(all_ships[this.order][this.state], 0, 0);
+    if(this.boosting>0&&this.state<2)
+      image(boosts_png[(this.boosting%8>3)?1:0], 0, 0);
     pop()
   }
 
@@ -108,6 +121,7 @@ function player4(){
       angleMode(DEGREES);
       rotate(this.ammo_rotation);
       angleMode(RADIANS);
+      strokeWeight(0);
       for(let i=0;i<=this.normal_ammo-1;i++){
         rotate(TWO_PI/3.0);
         square(25, -2.5, 5);
