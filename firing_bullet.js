@@ -10,7 +10,10 @@ function firing_bullet(x, y, rotation, number, type){
       flying_bullets.push(new scatter_bullets(x, y, 15*i, number));
   }
   else if(type=="normal"){
-    pew_sound.play();
+    if(sound){
+      pew_sound.setVolume(0.2);
+      pew_sound.play();
+    }
     flying_bullets.push(new normal_bullets(x, y, rotation, number));
   }
 }

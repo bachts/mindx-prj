@@ -1,3 +1,5 @@
+let winner = [];
+
 function Scoreboard(){
 
   let dividing_section = int(540 / number_of_wins[number_of_players-2][match_index]);
@@ -13,12 +15,41 @@ function Scoreboard(){
   fill(33, 55, 156);
 
   if(end_round_time/70>=aftermath_actions.length+1){
-    new_round_Start();
+    for(let i=0;i<number_of_players;i++){
+      if(player_score[i]>=number_of_wins[number_of_players-2][match_index])
+        winner.push(i);
+    }
+    if(winner.length==0)
+      new_round_Start();
+    else{
+      let maxi = 0;
+      let check_winner = [];
+      for(let i=0;i<winner.length;i++){
+        if(maxi<player_score[winner[i]]){
+          while(check_winner.length>0)
+            check_winner.pop();
+          check_winner.push(winner[i]);
+        }
+        else if(maxi==player_score[winner[i]])
+          check_winner.push(winner[i]);
+      }
+      display_winner(check_winner);
+      winner = [];
+      noLoop();
+    }
   }
 
   if(end_round_time/70<aftermath_actions.length+1&&end_round_time/70>=aftermath_actions.length){
     for(let i=0;i<number_of_players;i++){
       rect(-300, -number_of_players*30+i*60, 600, 60);
+      for(let j=0;j<4;j++){
+        for(let k=0;k<4;k++){
+          push()
+          fill(((j*4+k-j)%2) ? 255 : 0);
+          square(240+k*15, -number_of_players*30+i*60+j*15, 15);
+          pop()
+        }
+      }
       push()
       translate(-280+player_score[i]*dividing_section, -number_of_players*30+i*60+30);
       rotate(HALF_PI);
@@ -33,6 +64,14 @@ function Scoreboard(){
       action[1] = 0;
     for(let i=0;i<number_of_players;i++){
       rect(-300, -number_of_players*30+i*60, 600, 60);
+      for(let j=0;j<4;j++){
+        for(let k=0;k<4;k++){
+          push()
+          fill(((j*4+k-j)%2) ? 255 : 0);
+          square(240+k*15, -number_of_players*30+i*60+j*15, 15);
+          pop()
+        }
+      }
       if(i!=action[0]){
         push()
         translate(-280 + player_score[i]*dividing_section, -number_of_players*30+i*60+30);

@@ -268,6 +268,53 @@ function pause_game(){
     begin_new_game = false;
     advance_setting = false;
     player_setup = false;
+    cameraX = 0;
+    cameraY = 0;
+    loop();
+  });
+}
+
+function display_winner(arr){
+  let word_winner;
+  if(arr.length==1)
+    word_winner = createSpan("WINNER");
+  else
+    word_winner = createSpan("WINNERS");
+  word_winner.addClass("displaying");
+  word_winner.size(500, 60);
+  word_winner.position(game_Width/2-200, game_Height/2-160);
+
+  push()
+  imageMode(CENTER);
+  for(let i=0;i<arr.length;i++)
+    image(all_ships[arr[i]][0], -(arr.length-1)*20+i*40, -10);
+  pop()
+
+  button_rematch = createButton("REMATCH");
+  button_rematch.size(180, 50);
+  button_rematch.position(game_Width/2+60, game_Height/2+30);
+  button_rematch.mouseClicked(function(){
+    word_winner.remove();
+    button_rematch.remove();
+    button_return_to_menu.remove();
+    game_setup_complete = false;
+    loop();
+  });
+
+  button_return_to_menu = createButton("RETURN TO MENU");
+  button_return_to_menu.size(300, 50)
+  button_return_to_menu.position(game_Width/2-360, game_Height/2+30);
+  button_return_to_menu.mouseClicked(function(){
+    word_winner.remove();
+    button_rematch.remove();
+    button_return_to_menu.remove();
+    setup_new_game = false;
+    setup_option = false;
+    begin_new_game = false;
+    advance_setting = false;
+    player_setup = false;
+    cameraX = 0;
+    cameraY = 0;
     loop();
   });
 }

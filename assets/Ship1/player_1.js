@@ -16,12 +16,12 @@ function player1(){ // Tàu 1
 
   this.type_special_ammo = chosen;                                          // Loại đạn ban đầu
 
-  if(advance_setting_state["STARTING POWER:"]==0)                                                   //
-    this.special_ammo = 0;                                                                          // Đạn đặc biệt ban đầu
-  else if(!advance_setting_state["TRIPPLE POWER:"])                                                 //
-    this.special_ammo = 1;                                                                          //
-  else                                                                                              //
-    this.special_ammo = 3;                                                                          //
+  if(advance_setting_state["STARTING POWER:"]==0)                           //
+    this.special_ammo = 0;                                                  // Đạn đặc biệt ban đầu
+  else if(!advance_setting_state["TRIPPLE POWER:"])                         //
+    this.special_ammo = 1;                                                  //
+  else                                                                      //
+    this.special_ammo = 3;                                                  //
 
   this.reload = 0;                                                          // Đếm thời gian để nạp 1 viên đạn bình thường
 

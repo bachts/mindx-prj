@@ -1,4 +1,4 @@
-var cameraX, cameraY, camera_coord = [];
+var cameraX = 0, cameraY = 0, camera_coord = [];
 var scaling;
 var xOffset, yOffset;
 

@@ -31,7 +31,8 @@ function setup() {
 }
 
 function draw(){
-  image(space_background, 0, 0, game_Width, game_Height);
+  if(!begin_new_game)
+    display_background(0, 0);
   if(!player_setup&&!setup_option){
     noLoop();
     starting_menu();
@@ -57,6 +58,10 @@ function draw(){
       }
       else if(begin_new_game){
         push();
+        if(!game_setup_complete){
+          new_game_Start();
+          game_setup_complete = true;
+        }
         camera_coord = calculate_camera();
         cameraX = camera_coord[0];
         cameraY = camera_coord[1];
@@ -65,12 +70,8 @@ function draw(){
         yOffset = cameraY - game_Height/2;
         scale(scaling);
         translate((game_Width/2)/scaling, (game_Height/2)/scaling);
-        if(!game_setup_complete){
-          new_game_Start();
-          game_setup_complete = true;
-        }
+        display_background(game_Width/2+xOffset, game_Height/2+yOffset);
         push()
-        circle(0, 0, 10);
         strokeWeight(10);
         noFill();
         stroke("blue");
