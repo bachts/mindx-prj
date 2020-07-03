@@ -7,23 +7,23 @@ function display_background(coordX, coordY){
 	strokeWeight(0);
 	rect(-coordX-game_Width/2, -coordY-game_Height/2, game_Width*2, game_Height*2);
 	if(particles.length==0){
-		for(let i=2;i<=254;i+=2){
+		for(let i=3;i<=255;i+=3){
 			particles.push([random(-game_Width/8, game_Width*9/8), random(-game_Height/8, game_Height*9/8)]);
 			time_appear.push(i);
 		}
 	}
 	else{
-		for(let i=0;i<=126;i++){
-			time_appear[i]-=2;
+		for(let i=0;i<=84;i++){
+			time_appear[i]-=3;
 			if(time_appear[i]==0){
 				time_appear.splice(i, 1);
 				particles.splice(i, 1);
 			}
 		}
-		time_appear.push(254);
+		time_appear.push(255);
 		particles.push([random(-game_Width/8, game_Width*9/8), random(-game_Height/8, game_Height*9/8)]);
 	}
-	for(let i=0;i<=126;i++){
+	for(let i=0;i<=84;i++){
 		push()
 		let col = color(255);
 		col.setAlpha(time_appear[i]);

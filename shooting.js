@@ -15,6 +15,8 @@ var number_of_wins = [
 
 var game_Height, game_Width;
 
+var displaying = false;
+
 function setup() {
 
   textFont(game_Font);
@@ -34,27 +36,45 @@ function draw(){
   if(!begin_new_game)
     display_background(0, 0);
   if(!player_setup&&!setup_option){
-    noLoop();
-    starting_menu();
+    if(!displaying){
+      starting_menu();
+      displaying = true;
+    }
   }
   else if(setup_option){
-    noLoop();
-    options_display();
+    if(!displaying){
+      options_display();
+      displaying = true;
+    }
   }
   else if(player_setup){
     if(!setup_new_game){
-      noLoop();
-      player_option();
+      if(!displaying){
+        player_option();
+        displaying = true;
+      }
     }
     else{
       if(!begin_new_game&&!advance_setting){
         game_setup_complete = false;
-        noLoop();
-        options_for_new_game();
+        if(!displaying){
+          options_for_new_game();
+          displaying = true;
+        }
       }
       else if(advance_setting){
-        noLoop();
-        advance_options();
+        push()
+        fill(204, 57, 4);
+        rect(200, 100, game_Width-400, game_Height-200, 20);
+        noFill();
+        stroke(color("white"));
+        strokeWeight(20);
+        rect(250, 150, game_Width-500, game_Height-300, 20);
+        pop()
+        if(!displaying){
+          advance_options();
+          displaying = true;
+        }
       }
       else if(begin_new_game){
         push();

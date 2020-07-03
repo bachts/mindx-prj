@@ -107,7 +107,7 @@ function player1(){ // Tàu 1
     imageMode(CENTER);
     if(this.side_cannons&&this.state<2)
       image(side_cannons_png, 0, 0);
-    image(all_ships[this.order][this.state], 0, 0);
+    image(all_Ships[this.order][this.state], 0, 0);
     if(this.boosting>0&&this.state<2)
       image(boosts_png[(this.boosting%8>3)?1:0], 0, 0);
     pop()

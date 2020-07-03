@@ -12,7 +12,8 @@ function starting_menu(){
     button_start.remove();
     button_option.remove();
     player_setup = true;
-    loop();
+
+    displaying = false;
   });
 
   button_option = createButton("OPTIONS");
@@ -23,7 +24,8 @@ function starting_menu(){
     button_start.remove();
     button_option.remove();
     setup_option = true;
-    loop();
+
+    displaying = false;
   });
 }
 
@@ -36,7 +38,8 @@ function options_display(){
     button_music.remove();
     button_sound.remove();
     setup_option = false;
-    loop();
+
+    displaying = false;
   });
 
   button_music = createButton("MUSIC: " + ((music) ? "ON" : "OFF"));
@@ -47,7 +50,8 @@ function options_display(){
     button_music.remove();
     button_sound.remove();
     music = (music) ? false : true;
-    loop();
+
+    displaying = false;
   });
 
   button_sound = createButton("SOUND: " + ((sound) ? "ON" : "OFF"));
@@ -58,7 +62,8 @@ function options_display(){
     button_music.remove();
     button_sound.remove();
     sound = (sound) ? false : true;
-    loop();
+
+    displaying = false;
   });
 }
 
@@ -72,7 +77,8 @@ function player_option(){
     button_choose_number_of_players.remove();
     control_guidance.remove();
     player_setup = false;
-    loop();
+
+    displaying = false;
   });
 
   button_choose_number_of_players = createButton("PLAYERS: " + String(number_of_players) + "-PLAYERS");
@@ -85,7 +91,8 @@ function player_option(){
     control_guidance.remove();
     let index = [1, 2, 0], number = [2, 3, 4];
     number_of_players = number[index[number.indexOf(number_of_players)]];
-    loop();
+
+    displaying = false;
   });
 
   if(number_of_players==2)
@@ -112,7 +119,8 @@ function player_option(){
     button_choose_number_of_players.remove();
     control_guidance.remove();
     setup_new_game = true;
-    loop();
+
+    displaying = false;
   });
 }
 
@@ -126,7 +134,8 @@ function options_for_new_game(){
     button_advance_setting.remove();
     button_begin.remove();
     setup_new_game = false;
-    loop();
+
+    displaying = false;
   });
 
   button_type_match = createButton(type[match_index] + " MATCH: " + number_of_wins[number_of_players-2][match_index] + " WINS");
@@ -139,7 +148,8 @@ function options_for_new_game(){
     button_begin.remove();
     let index = [1, 2, 0];
     match_index = index[match_index];
-    loop();
+
+    displaying = false;
   });
 
   button_advance_setting = createButton("ADVANCE SETTING");
@@ -151,7 +161,8 @@ function options_for_new_game(){
     button_advance_setting.remove();
     button_begin.remove();
     advance_setting = true;
-    loop();
+
+    displaying = false;
   });
 
   button_begin = createButton("BEGIN >>");
@@ -163,7 +174,8 @@ function options_for_new_game(){
     button_advance_setting.remove();
     button_begin.remove();
     begin_new_game = true;
-    loop();
+
+    displaying = false;
   });
 }
 
@@ -178,17 +190,9 @@ function advance_options(){
       display.splice(0, 1);
     }
     advance_setting = false;
-    loop();
-  });
 
-  push()
-  fill(204, 57, 4);
-  rect(200, 100, game_Width-400, game_Height-200, 20);
-  noFill();
-  stroke(color("white"));
-  strokeWeight(20);
-  rect(250, 150, game_Width-500, game_Height-300, 20);
-  pop()
+    displaying = false;
+  });
 
   let options = ["START WITH SHIELD:", "POWERUPS:", "STARTING POWER:", "TRIPPLE POWER:", "SUPER DASH:"];
   let display = [];
@@ -208,7 +212,8 @@ function advance_options(){
           display.splice(0, 1);
         }
         advance_setting_state[options[i]] = (advance_setting_state[options[i]]) ? false : true;
-        loop();
+
+        displaying = false;
       });
     }
     else{
@@ -220,7 +225,8 @@ function advance_options(){
           display.splice(0, 1);
         }
         advance_setting_state[options[i]] = (advance_setting_state[options[i]]+1)%6;
-        loop();
+
+        displaying = false;
       });
     }
     state.size(140, 50);
@@ -287,7 +293,7 @@ function display_winner(arr){
   push()
   imageMode(CENTER);
   for(let i=0;i<arr.length;i++)
-    image(all_ships[arr[i]][0], -(arr.length-1)*20+i*40, -10);
+    image(all_Ships[arr[i]][0], -(arr.length-1)*20+i*40, -10);
   pop()
 
   button_rematch = createButton("REMATCH");

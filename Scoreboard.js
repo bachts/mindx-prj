@@ -53,7 +53,7 @@ function Scoreboard(){
       push()
       translate(-280+player_score[i]*dividing_section, -number_of_players*30+i*60+30);
       rotate(HALF_PI);
-      image(all_ships[i][0], 0, 0);
+      image(all_Ships[i][0], 0, 0);
       pop()
     }
   }
@@ -76,14 +76,14 @@ function Scoreboard(){
         push()
         translate(-280 + player_score[i]*dividing_section, -number_of_players*30+i*60+30);
         rotate(HALF_PI);
-        image(all_ships[i][0], 0, 0);
+        image(all_Ships[i][0], 0, 0);
         pop()
       }
       else if(i==action[0]&&action[1]>0){
         push()
         translate(-280 + player_score[i]*dividing_section + (((end_round_time%70>60)?60:end_round_time%70)/60)*dividing_section, -number_of_players*30+i*60+30);
         rotate(HALF_PI);
-        image(all_ships[i][0], 0, 0);
+        image(all_Ships[i][0], 0, 0);
         pop()
       }
       else{
@@ -91,7 +91,7 @@ function Scoreboard(){
         translate(-280 + player_score[i]*dividing_section + action[1]*(((end_round_time%70>60)?60:end_round_time%70)/60)*dividing_section, -number_of_players*30+i*60+30);
         rotate(HALF_PI);
         rotate(((end_round_time%70>60)?60:end_round_time%70)/5);
-        image(all_ships[i][0], 0, 0);
+        image(all_Ships[i][0], 0, 0);
         pop()
       }
     }

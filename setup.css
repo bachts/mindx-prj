@@ -8,6 +8,7 @@ html{
 }
 
 body{
+    -webkit-user-select: none;
     margin: 0;
     position:absolute;
     top: 0;

@@ -94,6 +94,9 @@ function mine_bullets(x, y, number){
       let index = mines.indexOf(this);
       mines.splice(index, 1);
     }
+    // if(this.counting_to_explode==25&&sound){
+
+    // }
     if(this.triggered)
       this.counting_to_explode++;
   };
