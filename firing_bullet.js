@@ -2,24 +2,20 @@ function firing_bullet(x, y, rotation, number, type){
   if(type=="mine")
     mines.push(new mine_bullets(x, y, number));
   else if(type=="laser"){
-    // if(sound){
-
-    // }
+    if(sound)
+      laser_Sound.play();
     flying_bullets.push(new laser_bullets(x, y, rotation, number));
     players[number].knockback = 8;
   }
   else if(type=="scatter"){
-    // if(sound){
-
-    // }
+    if(sound)
+      scatting_Sound.play();
     for(let i=0;i<24;i++)
       flying_bullets.push(new scatter_bullets(x, y, 15*i, number));
   }
   else if(type=="normal"){
-    if(sound){
-      pew_Sound.setVolume(0.2);
+    if(sound)
       pew_Sound.play();
-    }
     flying_bullets.push(new normal_bullets(x, y, rotation, number));
   }
 }

@@ -19,8 +19,10 @@ function Scoreboard(){
       if(player_score[i]>=number_of_wins[number_of_players-2][match_index])
         winner.push(i);
     }
-    if(winner.length==0)
+    if(winner.length==0){
       new_round_Start();
+      checkMusic();
+    }
     else{
       let maxi = 0;
       let check_winner = [];

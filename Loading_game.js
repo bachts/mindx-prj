@@ -11,6 +11,7 @@ var aftermath_actions = [];
 
 function new_game_Start(){
 
+  loadAudio(battle_Music);
   countdown = 200;
   end_round = 0;
   end_round_time = 0;
@@ -54,6 +55,7 @@ function new_game_Start(){
 
 function new_round_Start(){
 
+  loadAudio(battle_Music);
   end_round_time = 0;
   countdown = 200;
   end_round = 0;

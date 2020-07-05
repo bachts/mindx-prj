@@ -3,6 +3,11 @@
     src: url(assets/press-start-2p-font/PressStart2P-vaV7.ttf);
 }
 
+@keyframes moving-down{
+    from{top:-100px;}
+    to{top:184px}
+}
+
 html{
     height: 100%;
 }
@@ -15,6 +20,11 @@ body{
     bottom: 0;
     right: 0;
     left: 0;
+}
+
+#animated-down{
+    animation-duration: 4s;
+    animation-name: moving-down;
 }
 
 span{

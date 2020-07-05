@@ -1,6 +1,7 @@
 function starting_menu(){
   game_name_display = createSpan("SPACE PARTY");
   game_name_display.addClass("displaying");
+  game_name_display.id("animated-down");
   game_name_display.size(100, 60);
   game_name_display.position(game_Width/2-165, game_Height/2-200);
 
@@ -12,7 +13,6 @@ function starting_menu(){
     button_start.remove();
     button_option.remove();
     player_setup = true;
-
     displaying = false;
   });
 
@@ -24,7 +24,6 @@ function starting_menu(){
     button_start.remove();
     button_option.remove();
     setup_option = true;
-
     displaying = false;
   });
 }
@@ -38,7 +37,6 @@ function options_display(){
     button_music.remove();
     button_sound.remove();
     setup_option = false;
-
     displaying = false;
   });
 
@@ -50,7 +48,7 @@ function options_display(){
     button_music.remove();
     button_sound.remove();
     music = (music) ? false : true;
-
+    checkMusic();
     displaying = false;
   });
 
@@ -62,7 +60,6 @@ function options_display(){
     button_music.remove();
     button_sound.remove();
     sound = (sound) ? false : true;
-
     displaying = false;
   });
 }
@@ -77,7 +74,6 @@ function player_option(){
     button_choose_number_of_players.remove();
     control_guidance.remove();
     player_setup = false;
-
     displaying = false;
   });
 
@@ -91,7 +87,6 @@ function player_option(){
     control_guidance.remove();
     let index = [1, 2, 0], number = [2, 3, 4];
     number_of_players = number[index[number.indexOf(number_of_players)]];
-
     displaying = false;
   });
 
@@ -119,7 +114,6 @@ function player_option(){
     button_choose_number_of_players.remove();
     control_guidance.remove();
     setup_new_game = true;
-
     displaying = false;
   });
 }
@@ -134,7 +128,6 @@ function options_for_new_game(){
     button_advance_setting.remove();
     button_begin.remove();
     setup_new_game = false;
-
     displaying = false;
   });
 
@@ -148,7 +141,6 @@ function options_for_new_game(){
     button_begin.remove();
     let index = [1, 2, 0];
     match_index = index[match_index];
-
     displaying = false;
   });
 
@@ -161,7 +153,6 @@ function options_for_new_game(){
     button_advance_setting.remove();
     button_begin.remove();
     advance_setting = true;
-
     displaying = false;
   });
 
@@ -174,7 +165,6 @@ function options_for_new_game(){
     button_advance_setting.remove();
     button_begin.remove();
     begin_new_game = true;
-
     displaying = false;
   });
 }
@@ -190,7 +180,6 @@ function advance_options(){
       display.splice(0, 1);
     }
     advance_setting = false;
-
     displaying = false;
   });
 
@@ -212,7 +201,6 @@ function advance_options(){
           display.splice(0, 1);
         }
         advance_setting_state[options[i]] = (advance_setting_state[options[i]]) ? false : true;
-
         displaying = false;
       });
     }
@@ -225,7 +213,6 @@ function advance_options(){
           display.splice(0, 1);
         }
         advance_setting_state[options[i]] = (advance_setting_state[options[i]]+1)%6;
-
         displaying = false;
       });
     }
@@ -259,6 +246,7 @@ function pause_game(){
     word_paused.remove();
     button_continue.remove();
     button_return_to_menu.remove();
+    battle_Music.play();
     loop();
   });
 
@@ -269,6 +257,7 @@ function pause_game(){
     word_paused.remove();
     button_continue.remove();
     button_return_to_menu.remove();
+    loadAudio(menu_Music);
     setup_new_game = false;
     setup_option = false;
     begin_new_game = false;
@@ -276,6 +265,7 @@ function pause_game(){
     player_setup = false;
     cameraX = 0;
     cameraY = 0;
+    checkMusic();
     loop();
   });
 }
@@ -303,6 +293,7 @@ function display_winner(arr){
     word_winner.remove();
     button_rematch.remove();
     button_return_to_menu.remove();
+    loadAudio(battle_Music);
     game_setup_complete = false;
     loop();
   });
@@ -314,6 +305,7 @@ function display_winner(arr){
     word_winner.remove();
     button_rematch.remove();
     button_return_to_menu.remove();
+    loadAudio(menu_Music);
     setup_new_game = false;
     setup_option = false;
     begin_new_game = false;
@@ -321,6 +313,7 @@ function display_winner(arr){
     player_setup = false;
     cameraX = 0;
     cameraY = 0;
+    checkMusic();
     loop();
   });
 }

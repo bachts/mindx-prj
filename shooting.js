@@ -19,7 +19,7 @@ var displaying = false;
 
 function setup() {
 
-  textFont(game_Font);
+  checkMusic();
   game_Height = displayHeight;
   game_Width = displayWidth;
   createCanvas(game_Width, game_Height);
@@ -81,6 +81,7 @@ function draw(){
         if(!game_setup_complete){
           new_game_Start();
           game_setup_complete = true;
+          checkMusic();
         }
         camera_coord = calculate_camera();
         cameraX = camera_coord[0];
@@ -142,6 +143,7 @@ function draw(){
           }
           if(mouseIsPressed){
             noLoop();
+            pauseAudio(battle_Music);
             pause_game();
           }
           if(players_left<=1&&end_round<180)
