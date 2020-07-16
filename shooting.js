@@ -109,7 +109,7 @@ function draw(){
         }
         if(countdown%60>=40&&countdown>0){
           push();
-          fill(0);
+          fill(255);
           textSize(24);
           text(int(countdown/60)+1, -12, 14);
           pop();
